@@ -19,6 +19,7 @@ from datetime import datetime
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from event_bus import EventBus
+from config import DJANGO_URL  # Импортируем URL из config.py
 
 logger = logging.getLogger(__name__)
 
@@ -311,8 +312,8 @@ class PlaybackSession:
                 logger.error(f"Не удалось записать аудио для вопроса {question_num}")
                 continue
             
-            # Получаем видео для воспроизведения
-            local_video_path = self.get_video_for_playback(question_num)
+            # Отправляем аудио на сервер и получаем видео для воспроизведения
+            video_path = self.send_audio_to_server(audio_file, question_num)
             
             # Удаляем временный аудиофайл
             try:
@@ -320,56 +321,165 @@ class PlaybackSession:
             except:
                 pass
             
-            if local_video_path and os.path.exists(local_video_path):
-                # Воспроизводим локальное видео
-                success = self.video_player.play_video(local_video_path)
+            if video_path:
+                # Воспроизводим полученное видео
+                success = self.video_player.play_video(video_path)
                 
                 # Сохраняем в историю сессии
                 self.session_history.append({
                     'question_number': question_num,
                     'hero_name': self.hero_name,
                     'language': self.language,
+                    'audio_sent': True,
                     'video_played': success,
+                    'video_source': video_path,
                     'timestamp': datetime.now().isoformat()
                 })
             else:
-                logger.error(f"Видео не получено для вопроса {question_num}")
-                # Если видео нет, ждем 5 секунд
-                time.sleep(5)
+                logger.error(f"Не удалось получить видео для вопроса {question_num}")
+                # Воспроизводим заглушку
+                fallback_success = self.play_fallback_video()
+                self.session_history.append({
+                    'question_number': question_num,
+                    'hero_name': self.hero_name,
+                    'language': self.language,
+                    'audio_sent': False,
+                    'video_played': fallback_success,
+                    'video_source': 'fallback',
+                    'timestamp': datetime.now().isoformat()
+                })
         
         logger.info(f"Сессия завершена для {self.hero_name}")
         return self.session_history
     
-    def get_video_for_playback(self, question_num):
-        """Получить видео для воспроизведения (упрощенная версия)"""
+    def send_audio_to_server(self, audio_file_path, question_num):
+        """Отправить аудиофайл на Django сервер и получить видео"""
         try:
-            # Вместо запроса к AI серверу, просто используем существующее видео
-            # Проверяем наличие тестового видео
-            test_videos = [
-                "media/greet_video.mp4",
-                "media/end_video.mp4",
-                f"media/hero_videos/{self.hero_name}/video1.mp4"
-            ]
+            # URL для отправки аудио (из config.py)
+            django_url = DJANGO_URL
+            api_url = f"{django_url}/subcategory/{self.subcategory_id}/ask/"
+            logger.info(f"Отправляю аудио на {api_url}")
             
-            for video_path in test_videos:
-                if os.path.exists(video_path):
-                    logger.info(f"Использую тестовое видео: {video_path}")
-                    return video_path
-            
-            logger.warning("Тестовые видео не найдены, создаю заглушку")
-            # Если видео нет, возвращаем None
+            # Подготавливаем данные для отправки
+            with open(audio_file_path, 'rb') as audio_file:
+                files = {
+                    'audio': (f'question_{question_num}.wav', audio_file, 'audio/wav')
+                }
+                
+                data = {
+                    'hero_name': self.hero_name,
+                    'language': self.language
+                }
+                
+                # Отправляем POST запрос
+                response = requests.post(
+                    api_url,
+                    files=files,
+                    data=data,
+                    timeout=60  # Увеличиваем таймаут для обработки видео
+                )
+                
+                if response.status_code == 200:
+                    result = response.json()
+                    logger.info(f"✅ Аудио успешно отправлено, ответ сервера: {result}")
+                    
+                    # Получаем путь к видео из ответа
+                    video_path = result.get('video')
+                    if video_path:
+                        logger.info(f"Получен путь к видео: {video_path}")
+                        return self.download_video_if_needed(video_path)
+                    else:
+                        logger.warning("Сервер не вернул путь к видео")
+                        return None
+                else:
+                    logger.error(f"❌ Ошибка сервера: {response.status_code}, {response.text}")
+                    return None
+                    
+        except requests.exceptions.RequestException as e:
+            logger.error(f"❌ Ошибка сети при отправке аудио: {e}")
             return None
+        except Exception as e:
+            logger.error(f"❌ Неожиданная ошибка при отправке аудио: {e}")
+            return None
+    
+    def download_video_if_needed(self, video_path):
+        """Скачать видео если это URL, или вернуть локальный путь"""
+        try:
+            # Если это полный URL
+            if video_path.startswith('http'):
+                # Скачиваем видео во временный файл
+                temp_video = tempfile.NamedTemporaryFile(suffix='.mp4', delete=False)
+                temp_video_path = temp_video.name
+                temp_video.close()
+                
+                logger.info(f"Скачиваю видео с {video_path}")
+                response = requests.get(video_path, stream=True, timeout=60)
+                
+                if response.status_code == 200:
+                    with open(temp_video_path, 'wb') as f:
+                        for chunk in response.iter_content(chunk_size=8192):
+                            f.write(chunk)
+                    
+                    logger.info(f"Видео скачано: {temp_video_path} ({os.path.getsize(temp_video_path)} байт)")
+                    return temp_video_path
+                else:
+                    logger.error(f"Не удалось скачать видео: {response.status_code}")
+                    return None
+            
+            # Если это относительный путь (начинается с /media/)
+            elif video_path.startswith('/media/'):
+                # Пробуем найти локально
+                local_path = video_path.replace('/media/', 'media/')
+                if os.path.exists(local_path):
+                    return local_path
+                else:
+                    logger.error(f"Локальный файл не найден: {local_path}")
+                    # Пробуем скачать с сервера
+                    full_url = f"{DJANGO_URL}{video_path}"
+                    return self.download_video_if_needed(full_url)
+            
+            # Если это просто имя файла или путь
+            else:
+                # Пробуем найти в разных местах
+                possible_paths = [
+                    f"media/hero_videos/{self.hero_name}/{video_path}",
+                    f"media/{video_path}",
+                    video_path
+                ]
+                
+                for path in possible_paths:
+                    if os.path.exists(path):
+                        return path
+                
+                logger.error(f"Видео не найдено по путям: {possible_paths}")
+                return None
                 
         except Exception as e:
-            logger.error(f"Ошибка получения видео: {e}")
+            logger.error(f"Ошибка обработки видео: {e}")
             return None
+    
+    def play_fallback_video(self):
+        """Воспроизвести видео-заглушку при ошибке"""
+        fallback_videos = [
+            "media/greet_video.mp4",
+            "media/end_video.mp4"
+        ]
+        
+        for video_path in fallback_videos:
+            if os.path.exists(video_path):
+                logger.info(f"Воспроизвожу видео-заглушку: {video_path}")
+                return self.video_player.play_video(video_path)
+        
+        # Если нет ни одного видео, просто ждем
+        logger.warning("Видео-заглушки не найдены, ожидаем 5 секунд")
+        time.sleep(5)
+        return False
 
 class PlaybackModule:
     """Основной модуль воспроизведения"""
     
-    def __init__(self, event_bus: EventBus, base_url: str = "http://djangoserver.local:8000"):
+    def __init__(self, event_bus: EventBus):
         self.event_bus = event_bus
-        self.base_url = base_url
         self.gui = RecordingGUI()
         self.audio_recorder = AudioRecorder()
         self.video_player = VideoPlayer()
@@ -408,7 +518,7 @@ class PlaybackModule:
                     hero_name=hero_name,
                     language='ru',
                     subcategory_id=subcategory_id,
-                    base_url=self.base_url,
+                    base_url=DJANGO_URL,
                     gui_controller=self.gui,
                     audio_recorder=self.audio_recorder,
                     video_player=self.video_player
@@ -522,6 +632,8 @@ def main():
         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
         handlers=[logging.StreamHandler(sys.stdout)]
     )
+    
+    logger.info(f"Использую Django URL: {DJANGO_URL}")
     
     # Создаем event bus для публикации событий
     event_bus = EventBus()
