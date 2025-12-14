@@ -78,7 +78,7 @@ class VideoPlayer:
             logger.info(f"✅ Видеофайл найден: {video_path} ({os.path.getsize(video_path)} байт)")
             
             # Используем omxplayer
-            cmd = ["omxplayer", "-o", "hdmi", video_path]
+            cmd = ["mpv", "--fs", "--no-input-default-bindings", video_path]
             logger.info(f"🚀 Запускаю команду: {' '.join(cmd)}")
             
             # Запускаем процесс
