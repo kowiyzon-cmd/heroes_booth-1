@@ -163,6 +163,7 @@ class BoothController:
                     # Читаем stderr
                     stderr_line = self.playback_process.stderr.readline()
                     if stderr_line:
+                        print(self.playback_process.stderr.readlines())
                         logger.error(f"PLAYBACK ERROR: {stderr_line.strip()}")
                         
             except Exception as e:

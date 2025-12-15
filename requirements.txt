@@ -1,10 +1,16 @@
 certifi==2025.11.12
+cffi==2.0.0
 charset-normalizer==3.4.4
 idna==3.11
 numpy==2.2.6
 opencv-python==4.12.0.88
 pillow==12.0.0
+PyAudio==0.2.14
+pycparser==2.23
 python-dotenv==1.2.1
 pyzbar==0.1.9
 requests==2.32.5
+sounddevice==0.5.3
+soundfile==0.13.1
+tk==0.1.0
 urllib3==2.6.2

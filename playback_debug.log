@@ -1,0 +1,702 @@
+2025-12-15 01:29:02,103 - __main__ - INFO - ================================================================================
+2025-12-15 01:29:02,103 - __main__ - INFO - 🚀🚀🚀 МОДУЛЬ ВОСПРОИЗВЕДЕНИЯ ЗАПУЩЕН 🚀🚀🚀
+2025-12-15 01:29:02,103 - __main__ - INFO - ================================================================================
+2025-12-15 01:29:02,103 - __main__ - INFO - 📅 Время запуска: 2025-12-15T01:29:02.103457
+2025-12-15 01:29:02,103 - __main__ - INFO - 📁 Текущая директория: /home/kirabrin/Python/GR_admin_panel/booth
+2025-12-15 01:29:02,103 - __main__ - INFO - 📁 Директория скрипта: /home/kirabrin/Python/GR_admin_panel/booth/modules
+2025-12-15 01:29:02,103 - __main__ - INFO - 🌐 Базовый URL из config.py: http://31.172.75.187:6500
+2025-12-15 01:29:02,103 - __main__ - INFO - 🔧 БЫСТРАЯ ПРОВЕРКА СИСТЕМЫ
+2025-12-15 01:29:02,103 - __main__ - INFO - ==================================================
+2025-12-15 01:29:02,105 - __main__ - INFO - ✅ mpv найден: /usr/bin/mpv
+2025-12-15 01:29:02,188 - __main__ - INFO - 📊 Версия: mpv 0.37.0 Copyright © 2000-2023 mpv/MPlayer/mplayer2 projects
+2025-12-15 01:29:02,188 - __main__ - INFO - 
+🔍 Проверяю видеофайлы:
+2025-12-15 01:29:02,188 - __main__ - INFO - ✅ media/greet_video.mp4 - 8497 байт
+2025-12-15 01:29:02,188 - __main__ - INFO - ✅ media/end_video.mp4 - 8479 байт
+2025-12-15 01:29:02,188 - __main__ - INFO - 
+🌐 Проверяю доступ к серверу: http://31.172.75.187:6500
+2025-12-15 01:29:02,190 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 31.172.75.187:6500
+2025-12-15 01:29:02,328 - urllib3.connectionpool - DEBUG - http://31.172.75.187:6500 "GET / HTTP/1.1" 302 0
+2025-12-15 01:29:02,459 - urllib3.connectionpool - DEBUG - http://31.172.75.187:6500 "GET /login/ HTTP/1.1" 200 895
+2025-12-15 01:29:02,460 - __main__ - INFO - ✅ Сервер доступен, статус: 200
+2025-12-15 01:29:02,460 - __main__ - INFO - ==================================================
+2025-12-15 01:29:02,460 - __main__ - INFO - ✅ ПРОВЕРКА ЗАВЕРШЕНА
+2025-12-15 01:29:02,461 - __main__ - INFO - 
+📦 АРГУМЕНТЫ КОМАНДНОЙ СТРОКИ:
+2025-12-15 01:29:02,461 - __main__ - INFO - Количество аргументов: 2
+2025-12-15 01:29:02,461 - __main__ - INFO - Сырые данные (первые 200 символов): {"hero_names": ["\u0413\u0435\u0440\u043e\u04391", "\u0413\u0435\u0440\u043e\u04392", "\u0413\u0435\u0440\u043e\u04393"], "subcategory_id": 8, "total_videos": 3, "timestamp": 1765751341.9530234}...
+2025-12-15 01:29:02,461 - __main__ - INFO - ✅ JSON успешно распарсен
+2025-12-15 01:29:02,461 - __main__ - DEBUG - Полные данные: {
+  "hero_names": [
+    "Герой1",
+    "Герой2",
+    "Герой3"
+  ],
+  "subcategory_id": 8,
+  "total_videos": 3,
+  "timestamp": 1765751341.9530234
+}
+2025-12-15 01:29:02,461 - __main__ - INFO - 
+🎭 ДАННЫЕ ДЛЯ ОБРАБОТКИ:
+2025-12-15 01:29:02,461 - __main__ - INFO - Герои: ['Герой1', 'Герой2', 'Герой3']
+2025-12-15 01:29:02,461 - __main__ - INFO - Количество героев: 3
+2025-12-15 01:29:02,461 - __main__ - INFO - ID подкатегории: 8
+2025-12-15 01:29:02,461 - __main__ - INFO - 
+🛠 СОЗДАЮ КОМПОНЕНТЫ...
+2025-12-15 01:29:02,461 - __main__ - INFO - 🖥 Запускаю GUI в отдельном потоке...
+2025-12-15 01:29:02,461 - __main__ - INFO - 🖥 Запускаю главный цикл Tkinter...
+2025-12-15 01:29:02,461 - __main__ - INFO - ✅ GUI поток запущен
+2025-12-15 01:29:02,461 - __main__ - INFO - 🖥 Инициализирую Tkinter...
+2025-12-15 01:29:02,461 - __main__ - INFO - ⏳ Ожидаю инициализацию GUI (3 секунды)...
+2025-12-15 01:29:02,517 - __main__ - INFO - ✅ Tkinter инициализирован
+2025-12-15 01:29:02,517 - __main__ - INFO - ✅ GUI цикл запущен
+2025-12-15 01:29:05,517 - __main__ - INFO - 
+🎬 ШАГ 1: ПРИВЕТСТВЕННОЕ ВИДЕО
+2025-12-15 01:29:05,517 - __main__ - INFO - 📁 Приветственное видео найдено: media/greet_video.mp4
+2025-12-15 01:29:05,517 - __main__ - INFO - 🎬 Пытаюсь воспроизвести видео: media/greet_video.mp4
+2025-12-15 01:29:05,517 - __main__ - INFO - ✅ Видеофайл найден: media/greet_video.mp4 (8497 байт)
+2025-12-15 01:29:05,517 - __main__ - INFO - 🚀 Запускаю команду: mpv --fs --no-input-default-bindings media/greet_video.mp4
+2025-12-15 01:29:05,607 - __main__ - DEBUG - MPV stdout: (+) Video --vid=1 (*) (h264 854x480 25.000fps)
+2025-12-15 01:29:05,684 - __main__ - DEBUG - MPV stderr: [vo/gpu/opengl] Suspected software renderer or indirect context.
+2025-12-15 01:29:06,041 - __main__ - DEBUG - MPV stdout: [vo/sdl] Using opengl
+2025-12-15 01:29:06,042 - __main__ - DEBUG - MPV stderr: [vo/gpu/drm] VT_GETMODE failed: Inappropriate ioctl for device
+2025-12-15 01:29:06,077 - __main__ - DEBUG - MPV stdout: VO: [sdl] 854x480 yuv420p
+2025-12-15 01:29:06,077 - __main__ - DEBUG - MPV stderr: [vo/gpu/drm] Failed to set up VT switcher. Terminal switching will be unavailable.
+2025-12-15 01:29:11,253 - __main__ - DEBUG - MPV stdout: 
+2025-12-15 01:29:11,253 - __main__ - DEBUG - MPV stderr: VMware: No 3D enabled (0, Success).
+2025-12-15 01:29:11,254 - __main__ - DEBUG - MPV stdout: Exiting... (End of file)
+2025-12-15 01:29:11,254 - __main__ - DEBUG - MPV stderr: [vo/gpu/drm] Failed to acquire DRM master: Permission denied
+2025-12-15 01:29:11,410 - __main__ - DEBUG - MPV stdout: V: 00:00:04 / 00:00:05 (99%)
+2025-12-15 01:29:11,410 - __main__ - DEBUG - MPV stderr: [vo/gpu/drm] Failed to commit ModeSetting atomic request: Permission denied
+2025-12-15 01:29:11,410 - __main__ - DEBUG - MPV stderr: [vo/gpu/opengl] Failed to set CRTC for connector 41: Permission denied
+2025-12-15 01:29:11,410 - __main__ - DEBUG - MPV stderr: [vo/gpu] Failed to commit atomic request: Permission denied
+2025-12-15 01:29:11,410 - __main__ - DEBUG - MPV stderr: [vo/gpu/drm] Failed to commit ModeSetting atomic request: Permission denied
+2025-12-15 01:29:11,410 - __main__ - DEBUG - MPV stderr: [vo/gpu/drm] Failed to restore previous mode
+2025-12-15 01:29:11,411 - __main__ - DEBUG - MPV stderr: [vo/gpu/drm] Failed to drop DRM master: Permission denied
+2025-12-15 01:29:11,411 - __main__ - DEBUG - MPV stderr: [vo/gpu/libplacebo] Found no suitable device, giving up.
+2025-12-15 01:29:11,411 - __main__ - DEBUG - MPV stderr: [vo/gpu/libplacebo] Failed initializing vulkan device
+2025-12-15 01:29:11,411 - __main__ - DEBUG - MPV stderr: [vo/gpu-next/opengl] Suspected software renderer or indirect context.
+2025-12-15 01:29:11,411 - __main__ - DEBUG - MPV stderr: [vo/gpu-next/drm] Can't handle VT release - signal already used
+2025-12-15 01:29:11,411 - __main__ - DEBUG - MPV stderr: [vo/gpu-next/drm] Failed to set up VT switcher. Terminal switching will be unavailable.
+2025-12-15 01:29:11,411 - __main__ - DEBUG - MPV stderr: VMware: No 3D enabled (0, Success).
+2025-12-15 01:29:11,411 - __main__ - DEBUG - MPV stderr: [vo/gpu-next/drm] Failed to acquire DRM master: Permission denied
+2025-12-15 01:29:11,411 - __main__ - DEBUG - MPV stderr: [vo/gpu-next/drm] Failed to commit ModeSetting atomic request: Permission denied
+2025-12-15 01:29:11,411 - __main__ - DEBUG - MPV stderr: [vo/gpu-next/opengl] Failed to set CRTC for connector 41: Permission denied
+2025-12-15 01:29:11,411 - __main__ - DEBUG - MPV stderr: [vo/gpu-next] Failed to commit atomic request: Permission denied
+2025-12-15 01:29:11,411 - __main__ - DEBUG - MPV stderr: [vo/gpu-next/drm] Failed to commit ModeSetting atomic request: Permission denied
+2025-12-15 01:29:11,411 - __main__ - DEBUG - MPV stderr: [vo/gpu-next/drm] Failed to restore previous mode
+2025-12-15 01:29:11,411 - __main__ - DEBUG - MPV stderr: [vo/gpu-next/drm] Failed to drop DRM master: Permission denied
+2025-12-15 01:29:11,411 - __main__ - DEBUG - MPV stderr: [vo/gpu-next/libplacebo] Found no suitable device, giving up.
+2025-12-15 01:29:11,411 - __main__ - DEBUG - MPV stderr: [vo/gpu-next/libplacebo] Failed initializing vulkan device
+2025-12-15 01:29:11,411 - __main__ - DEBUG - MPV stderr: Failed to open VDPAU backend libvdpau_nvidia.so: cannot open shared object file: No such file or directory
+2025-12-15 01:29:11,411 - __main__ - DEBUG - MPV stderr: [vo/vdpau] Error when calling vdp_device_create_x11: 1
+2025-12-15 01:29:11,411 - __main__ - DEBUG - MPV stderr: [vo/xv] No Xvideo support found.
+2025-12-15 01:29:11,411 - __main__ - DEBUG - MPV stderr: [vo/sdl] Warning: this legacy VO has bad performance. Consider fixing your graphics drivers, or not forcing the sdl VO.
+2025-12-15 01:29:11,411 - __main__ - DEBUG - MPV stderr: V: 00:00:00 / 00:00:05 (0%)
+2025-12-15 01:29:11,411 - __main__ - DEBUG - MPV stderr: V: 00:00:00 / 00:00:05 (1%)
+2025-12-15 01:29:11,411 - __main__ - DEBUG - MPV stderr: V: 00:00:00 / 00:00:05 (2%)
+2025-12-15 01:29:11,411 - __main__ - DEBUG - MPV stderr: V: 00:00:00 / 00:00:05 (3%)
+2025-12-15 01:29:11,411 - __main__ - DEBUG - MPV stderr: V: 00:00:00 / 00:00:05 (4%)
+2025-12-15 01:29:11,411 - __main__ - DEBUG - MPV stderr: V: 00:00:00 / 00:00:05 (5%)
+2025-12-15 01:29:11,411 - __main__ - DEBUG - MPV stderr: V: 00:00:00 / 00:00:05 (6%)
+2025-12-15 01:29:11,411 - __main__ - DEBUG - MPV stderr: V: 00:00:00 / 00:00:05 (7%)
+2025-12-15 01:29:11,411 - __main__ - DEBUG - MPV stderr: V: 00:00:00 / 00:00:05 (8%)
+2025-12-15 01:29:11,411 - __main__ - DEBUG - MPV stderr: V: 00:00:00 / 00:00:05 (9%)
+2025-12-15 01:29:11,411 - __main__ - DEBUG - MPV stderr: V: 00:00:00 / 00:00:05 (10%)
+2025-12-15 01:29:11,411 - __main__ - DEBUG - MPV stderr: V: 00:00:00 / 00:00:05 (11%)
+2025-12-15 01:29:11,411 - __main__ - DEBUG - MPV stderr: V: 00:00:00 / 00:00:05 (12%)
+2025-12-15 01:29:11,411 - __main__ - DEBUG - MPV stderr: V: 00:00:00 / 00:00:05 (13%)
+2025-12-15 01:29:11,411 - __main__ - DEBUG - MPV stderr: V: 00:00:00 / 00:00:05 (14%)
+2025-12-15 01:29:11,411 - __main__ - DEBUG - MPV stderr: V: 00:00:00 / 00:00:05 (15%)
+2025-12-15 01:29:11,411 - __main__ - DEBUG - MPV stderr: V: 00:00:00 / 00:00:05 (16%)
+2025-12-15 01:29:11,411 - __main__ - DEBUG - MPV stderr: V: 00:00:00 / 00:00:05 (17%)
+2025-12-15 01:29:11,411 - __main__ - DEBUG - MPV stderr: V: 00:00:00 / 00:00:05 (18%)
+2025-12-15 01:29:11,411 - __main__ - DEBUG - MPV stderr: V: 00:00:00 / 00:00:05 (19%)
+2025-12-15 01:29:11,411 - __main__ - DEBUG - MPV stderr: V: 00:00:01 / 00:00:05 (20%)
+2025-12-15 01:29:11,412 - __main__ - DEBUG - MPV stderr: V: 00:00:01 / 00:00:05 (21%)
+2025-12-15 01:29:11,412 - __main__ - DEBUG - MPV stderr: V: 00:00:01 / 00:00:05 (22%)
+2025-12-15 01:29:11,412 - __main__ - DEBUG - MPV stderr: V: 00:00:01 / 00:00:05 (23%)
+2025-12-15 01:29:11,412 - __main__ - DEBUG - MPV stderr: V: 00:00:01 / 00:00:05 (24%)
+2025-12-15 01:29:11,412 - __main__ - DEBUG - MPV stderr: V: 00:00:01 / 00:00:05 (25%)
+2025-12-15 01:29:11,412 - __main__ - DEBUG - MPV stderr: V: 00:00:01 / 00:00:05 (26%)
+2025-12-15 01:29:11,412 - __main__ - DEBUG - MPV stderr: V: 00:00:01 / 00:00:05 (27%)
+2025-12-15 01:29:11,412 - __main__ - DEBUG - MPV stderr: V: 00:00:01 / 00:00:05 (28%)
+2025-12-15 01:29:11,412 - __main__ - DEBUG - MPV stderr: V: 00:00:01 / 00:00:05 (29%)
+2025-12-15 01:29:11,412 - __main__ - DEBUG - MPV stderr: V: 00:00:01 / 00:00:05 (30%)
+2025-12-15 01:29:11,412 - __main__ - DEBUG - MPV stderr: V: 00:00:01 / 00:00:05 (31%)
+2025-12-15 01:29:11,412 - __main__ - DEBUG - MPV stderr: V: 00:00:01 / 00:00:05 (32%)
+2025-12-15 01:29:11,412 - __main__ - DEBUG - MPV stderr: V: 00:00:01 / 00:00:05 (33%)
+2025-12-15 01:29:11,412 - __main__ - DEBUG - MPV stderr: V: 00:00:01 / 00:00:05 (34%)
+2025-12-15 01:29:11,412 - __main__ - DEBUG - MPV stderr: V: 00:00:01 / 00:00:05 (35%)
+2025-12-15 01:29:11,412 - __main__ - DEBUG - MPV stderr: V: 00:00:01 / 00:00:05 (36%)
+2025-12-15 01:29:11,412 - __main__ - DEBUG - MPV stderr: V: 00:00:01 / 00:00:05 (37%)
+2025-12-15 01:29:11,412 - __main__ - DEBUG - MPV stderr: V: 00:00:01 / 00:00:05 (38%)
+2025-12-15 01:29:11,412 - __main__ - DEBUG - MPV stderr: V: 00:00:01 / 00:00:05 (39%)
+2025-12-15 01:29:11,412 - __main__ - DEBUG - MPV stderr: V: 00:00:02 / 00:00:05 (40%)
+2025-12-15 01:29:11,412 - __main__ - DEBUG - MPV stderr: V: 00:00:02 / 00:00:05 (41%)
+2025-12-15 01:29:11,412 - __main__ - DEBUG - MPV stderr: V: 00:00:02 / 00:00:05 (42%)
+2025-12-15 01:29:11,412 - __main__ - DEBUG - MPV stderr: V: 00:00:02 / 00:00:05 (43%)
+2025-12-15 01:29:11,412 - __main__ - DEBUG - MPV stderr: V: 00:00:02 / 00:00:05 (44%)
+2025-12-15 01:29:11,412 - __main__ - DEBUG - MPV stderr: V: 00:00:02 / 00:00:05 (45%)
+2025-12-15 01:29:11,412 - __main__ - DEBUG - MPV stderr: V: 00:00:02 / 00:00:05 (46%)
+2025-12-15 01:29:11,412 - __main__ - DEBUG - MPV stderr: V: 00:00:02 / 00:00:05 (47%)
+2025-12-15 01:29:11,412 - __main__ - DEBUG - MPV stderr: V: 00:00:02 / 00:00:05 (48%)
+2025-12-15 01:29:11,412 - __main__ - DEBUG - MPV stderr: V: 00:00:02 / 00:00:05 (49%)
+2025-12-15 01:29:11,412 - __main__ - DEBUG - MPV stderr: V: 00:00:02 / 00:00:05 (50%)
+2025-12-15 01:29:11,412 - __main__ - DEBUG - MPV stderr: V: 00:00:02 / 00:00:05 (51%)
+2025-12-15 01:29:11,412 - __main__ - DEBUG - MPV stderr: V: 00:00:02 / 00:00:05 (52%)
+2025-12-15 01:29:11,412 - __main__ - DEBUG - MPV stderr: V: 00:00:02 / 00:00:05 (53%)
+2025-12-15 01:29:11,412 - __main__ - DEBUG - MPV stderr: V: 00:00:02 / 00:00:05 (54%)
+2025-12-15 01:29:11,412 - __main__ - DEBUG - MPV stderr: V: 00:00:02 / 00:00:05 (55%)
+2025-12-15 01:29:11,412 - __main__ - DEBUG - MPV stderr: V: 00:00:02 / 00:00:05 (56%)
+2025-12-15 01:29:11,412 - __main__ - DEBUG - MPV stderr: V: 00:00:02 / 00:00:05 (57%)
+2025-12-15 01:29:11,412 - __main__ - DEBUG - MPV stderr: V: 00:00:02 / 00:00:05 (58%)
+2025-12-15 01:29:11,412 - __main__ - DEBUG - MPV stderr: V: 00:00:02 / 00:00:05 (59%)
+2025-12-15 01:29:11,412 - __main__ - DEBUG - MPV stderr: V: 00:00:03 / 00:00:05 (60%)
+2025-12-15 01:29:11,412 - __main__ - DEBUG - MPV stderr: V: 00:00:03 / 00:00:05 (61%)
+2025-12-15 01:29:11,412 - __main__ - DEBUG - MPV stderr: V: 00:00:03 / 00:00:05 (62%)
+2025-12-15 01:29:11,413 - __main__ - DEBUG - MPV stderr: V: 00:00:03 / 00:00:05 (63%)
+2025-12-15 01:29:11,413 - __main__ - DEBUG - MPV stderr: V: 00:00:03 / 00:00:05 (64%)
+2025-12-15 01:29:11,413 - __main__ - DEBUG - MPV stderr: V: 00:00:03 / 00:00:05 (65%)
+2025-12-15 01:29:11,413 - __main__ - DEBUG - MPV stderr: V: 00:00:03 / 00:00:05 (66%)
+2025-12-15 01:29:11,413 - __main__ - DEBUG - MPV stderr: V: 00:00:03 / 00:00:05 (67%)
+2025-12-15 01:29:11,413 - __main__ - DEBUG - MPV stderr: V: 00:00:03 / 00:00:05 (68%)
+2025-12-15 01:29:11,413 - __main__ - DEBUG - MPV stderr: V: 00:00:03 / 00:00:05 (69%)
+2025-12-15 01:29:11,413 - __main__ - DEBUG - MPV stderr: V: 00:00:03 / 00:00:05 (70%)
+2025-12-15 01:29:11,413 - __main__ - DEBUG - MPV stderr: V: 00:00:03 / 00:00:05 (71%)
+2025-12-15 01:29:11,413 - __main__ - DEBUG - MPV stderr: V: 00:00:03 / 00:00:05 (72%)
+2025-12-15 01:29:11,413 - __main__ - DEBUG - MPV stderr: V: 00:00:03 / 00:00:05 (73%)
+2025-12-15 01:29:11,413 - __main__ - DEBUG - MPV stderr: V: 00:00:03 / 00:00:05 (74%)
+2025-12-15 01:29:11,413 - __main__ - DEBUG - MPV stderr: V: 00:00:03 / 00:00:05 (75%)
+2025-12-15 01:29:11,413 - __main__ - DEBUG - MPV stderr: V: 00:00:03 / 00:00:05 (76%)
+2025-12-15 01:29:11,413 - __main__ - DEBUG - MPV stderr: V: 00:00:03 / 00:00:05 (77%)
+2025-12-15 01:29:11,413 - __main__ - DEBUG - MPV stderr: V: 00:00:03 / 00:00:05 (78%)
+2025-12-15 01:29:11,413 - __main__ - DEBUG - MPV stderr: V: 00:00:03 / 00:00:05 (79%)
+2025-12-15 01:29:11,413 - __main__ - DEBUG - MPV stderr: V: 00:00:04 / 00:00:05 (80%)
+2025-12-15 01:29:11,413 - __main__ - DEBUG - MPV stderr: V: 00:00:04 / 00:00:05 (81%)
+2025-12-15 01:29:11,413 - __main__ - DEBUG - MPV stderr: V: 00:00:04 / 00:00:05 (82%)
+2025-12-15 01:29:11,413 - __main__ - DEBUG - MPV stderr: V: 00:00:04 / 00:00:05 (83%)
+2025-12-15 01:29:11,413 - __main__ - DEBUG - MPV stderr: V: 00:00:04 / 00:00:05 (84%)
+2025-12-15 01:29:11,413 - __main__ - DEBUG - MPV stderr: V: 00:00:04 / 00:00:05 (85%)
+2025-12-15 01:29:11,413 - __main__ - DEBUG - MPV stderr: V: 00:00:04 / 00:00:05 (86%)
+2025-12-15 01:29:11,413 - __main__ - DEBUG - MPV stderr: V: 00:00:04 / 00:00:05 (87%)
+2025-12-15 01:29:11,413 - __main__ - DEBUG - MPV stderr: V: 00:00:04 / 00:00:05 (88%)
+2025-12-15 01:29:11,413 - __main__ - DEBUG - MPV stderr: V: 00:00:04 / 00:00:05 (89%)
+2025-12-15 01:29:11,413 - __main__ - DEBUG - MPV stderr: V: 00:00:04 / 00:00:05 (90%)
+2025-12-15 01:29:11,413 - __main__ - DEBUG - MPV stderr: V: 00:00:04 / 00:00:05 (91%)
+2025-12-15 01:29:11,413 - __main__ - DEBUG - MPV stderr: V: 00:00:04 / 00:00:05 (92%)
+2025-12-15 01:29:11,413 - __main__ - DEBUG - MPV stderr: V: 00:00:04 / 00:00:05 (93%)
+2025-12-15 01:29:11,413 - __main__ - DEBUG - MPV stderr: V: 00:00:04 / 00:00:05 (94%)
+2025-12-15 01:29:11,413 - __main__ - DEBUG - MPV stderr: V: 00:00:04 / 00:00:05 (95%)
+2025-12-15 01:29:11,413 - __main__ - DEBUG - MPV stderr: V: 00:00:04 / 00:00:05 (96%)
+2025-12-15 01:29:11,413 - __main__ - DEBUG - MPV stderr: V: 00:00:04 / 00:00:05 (97%)
+2025-12-15 01:29:11,413 - __main__ - DEBUG - MPV stderr: V: 00:00:04 / 00:00:05 (98%)
+2025-12-15 01:29:11,413 - __main__ - DEBUG - MPV stderr: V: 00:00:04 / 00:00:05 (99%)
+2025-12-15 01:29:11,449 - __main__ - INFO - ✅ Видео воспроизведено успешно
+2025-12-15 01:29:11,449 - __main__ - INFO - ✅ Приветственное видео успешно воспроизведено
+2025-12-15 01:29:11,449 - __main__ - INFO - 
+🎬 ШАГ 2: СЕССИИ ГЕРОЕВ
+2025-12-15 01:29:11,449 - __main__ - INFO - 
+🎭 [1/3] НАЧИНАЮ СЕССИЮ ДЛЯ: Герой1
+2025-12-15 01:29:11,449 - __main__ - INFO - 🚀 НАЧИНАЮ СЕССИЮ ДЛЯ ГЕРОЯ: Герой1
+2025-12-15 01:29:11,449 - __main__ - INFO - ❓ ВОПРОС 1/6 ДЛЯ Герой1
+2025-12-15 01:29:11,449 - __main__ - INFO - 🖥 Показываю GUI для вопроса 1
+2025-12-15 01:29:11,450 - __main__ - INFO - 🖥 Показываю GUI для Герой1, вопрос 1/6
+2025-12-15 01:29:11,570 - __main__ - INFO - ✅ GUI успешно отображен
+2025-12-15 01:29:15,451 - __main__ - INFO - 🎤 Создаю аудиофайл...
+2025-12-15 01:29:15,451 - __main__ - INFO - 🎤 Начинаю создание аудиофайла на 3 секунд...
+2025-12-15 01:29:15,452 - __main__ - DEBUG - Создан временный файл: /tmp/tmpw0x77vgs.wav
+2025-12-15 01:29:15,452 - __main__ - DEBUG - Параметры аудио: sample_rate=44100, channels=1, duration_samples=132300, data_size=264600
+2025-12-15 01:29:15,474 - __main__ - INFO - ✅ Аудиофайл создан: /tmp/tmpw0x77vgs.wav (264644 байт)
+2025-12-15 01:29:15,474 - __main__ - INFO - 📤 Отправляю аудио на сервер...
+2025-12-15 01:29:15,474 - __main__ - INFO - 🌐 URL сервера: http://31.172.75.187:6500/subcategory/8/ask/
+2025-12-15 01:29:15,474 - __main__ - INFO - 📁 Размер аудиофайла: 264644 байт
+2025-12-15 01:29:15,475 - __main__ - INFO - 📤 Отправляю POST запрос на сервер...
+2025-12-15 01:29:15,475 - __main__ - DEBUG - Данные запроса: {'hero_name': 'Герой1', 'language': 'ru'}
+2025-12-15 01:29:15,476 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 31.172.75.187:6500
+2025-12-15 01:29:15,477 - __main__ - INFO - ✅ GUI скрыт
+2025-12-15 01:29:15,578 - urllib3.connectionpool - DEBUG - http://31.172.75.187:6500 "POST /subcategory/8/ask/ HTTP/1.1" 404 5829
+2025-12-15 01:29:15,620 - __main__ - INFO - 📥 Ответ сервера: статус 404
+2025-12-15 01:29:15,620 - __main__ - DEBUG - Заголовки ответа: {'Date': 'Sun, 14 Dec 2025 22:31:06 GMT', 'Server': 'WSGIServer/0.2 CPython/3.12.3', 'Content-Type': 'text/html; charset=utf-8', 'X-Frame-Options': 'DENY', 'Content-Length': '5829', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'same-origin', 'Cross-Origin-Opener-Policy': 'same-origin'}
+2025-12-15 01:29:15,620 - __main__ - ERROR - ❌ Ошибка сервера: 404
+2025-12-15 01:29:15,620 - __main__ - ERROR - Текст ошибки: <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Page not found at /subcategory/8/ask/</title>
+  <meta name="robots" content="NONE,NOARCHIVE">
+  <style>
+    html * { padding:0; margin:0; }
+    body * { padding:10px 20px; }
+    body * * { padding:0; }
+    body { font-family: sans-serif; background:#eee; color:#000; }
+    body > :where(header, main, footer) { border-bottom:1px solid #ddd; }
+    h1 { font-weight:normal; margin-bo
+2025-12-15 01:29:15,621 - __main__ - DEBUG - 🗑 Удалил аудиофайл: /tmp/tmpw0x77vgs.wav
+2025-12-15 01:29:15,621 - __main__ - WARNING - ⚠️ Видео не получено от сервера, жду 5 секунд
+2025-12-15 01:29:20,621 - __main__ - INFO - ❓ ВОПРОС 2/6 ДЛЯ Герой1
+2025-12-15 01:29:20,621 - __main__ - INFO - 🖥 Показываю GUI для вопроса 2
+2025-12-15 01:29:20,622 - __main__ - INFO - 🖥 Показываю GUI для Герой1, вопрос 2/6
+2025-12-15 01:29:20,693 - __main__ - INFO - ✅ GUI успешно отображен
+2025-12-15 01:29:24,622 - __main__ - INFO - 🎤 Создаю аудиофайл...
+2025-12-15 01:29:24,622 - __main__ - INFO - 🎤 Начинаю создание аудиофайла на 3 секунд...
+2025-12-15 01:29:24,622 - __main__ - DEBUG - Создан временный файл: /tmp/tmp8wqf6uyy.wav
+2025-12-15 01:29:24,623 - __main__ - DEBUG - Параметры аудио: sample_rate=44100, channels=1, duration_samples=132300, data_size=264600
+2025-12-15 01:29:24,644 - __main__ - INFO - ✅ Аудиофайл создан: /tmp/tmp8wqf6uyy.wav (264644 байт)
+2025-12-15 01:29:24,647 - __main__ - INFO - 📤 Отправляю аудио на сервер...
+2025-12-15 01:29:24,647 - __main__ - INFO - 🌐 URL сервера: http://31.172.75.187:6500/subcategory/8/ask/
+2025-12-15 01:29:24,647 - __main__ - INFO - 📁 Размер аудиофайла: 264644 байт
+2025-12-15 01:29:24,647 - __main__ - INFO - 📤 Отправляю POST запрос на сервер...
+2025-12-15 01:29:24,647 - __main__ - DEBUG - Данные запроса: {'hero_name': 'Герой1', 'language': 'ru'}
+2025-12-15 01:29:24,648 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 31.172.75.187:6500
+2025-12-15 01:29:24,649 - __main__ - INFO - ✅ GUI скрыт
+2025-12-15 01:29:24,791 - urllib3.connectionpool - DEBUG - http://31.172.75.187:6500 "POST /subcategory/8/ask/ HTTP/1.1" 404 5829
+2025-12-15 01:29:24,835 - __main__ - INFO - 📥 Ответ сервера: статус 404
+2025-12-15 01:29:24,835 - __main__ - DEBUG - Заголовки ответа: {'Date': 'Sun, 14 Dec 2025 22:31:15 GMT', 'Server': 'WSGIServer/0.2 CPython/3.12.3', 'Content-Type': 'text/html; charset=utf-8', 'X-Frame-Options': 'DENY', 'Content-Length': '5829', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'same-origin', 'Cross-Origin-Opener-Policy': 'same-origin'}
+2025-12-15 01:29:24,835 - __main__ - ERROR - ❌ Ошибка сервера: 404
+2025-12-15 01:29:24,835 - __main__ - ERROR - Текст ошибки: <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Page not found at /subcategory/8/ask/</title>
+  <meta name="robots" content="NONE,NOARCHIVE">
+  <style>
+    html * { padding:0; margin:0; }
+    body * { padding:10px 20px; }
+    body * * { padding:0; }
+    body { font-family: sans-serif; background:#eee; color:#000; }
+    body > :where(header, main, footer) { border-bottom:1px solid #ddd; }
+    h1 { font-weight:normal; margin-bo
+2025-12-15 01:29:24,836 - __main__ - DEBUG - 🗑 Удалил аудиофайл: /tmp/tmp8wqf6uyy.wav
+2025-12-15 01:29:24,836 - __main__ - WARNING - ⚠️ Видео не получено от сервера, жду 5 секунд
+2025-12-15 01:29:29,841 - __main__ - INFO - ❓ ВОПРОС 3/6 ДЛЯ Герой1
+2025-12-15 01:29:29,841 - __main__ - INFO - 🖥 Показываю GUI для вопроса 3
+2025-12-15 01:29:29,841 - __main__ - INFO - 🖥 Показываю GUI для Герой1, вопрос 3/6
+2025-12-15 01:29:29,931 - __main__ - INFO - ✅ GUI успешно отображен
+2025-12-15 01:29:33,842 - __main__ - INFO - 🎤 Создаю аудиофайл...
+2025-12-15 01:29:33,842 - __main__ - INFO - 🎤 Начинаю создание аудиофайла на 3 секунд...
+2025-12-15 01:29:33,842 - __main__ - DEBUG - Создан временный файл: /tmp/tmpww6vqcfr.wav
+2025-12-15 01:29:33,842 - __main__ - DEBUG - Параметры аудио: sample_rate=44100, channels=1, duration_samples=132300, data_size=264600
+2025-12-15 01:29:33,870 - __main__ - INFO - ✅ Аудиофайл создан: /tmp/tmpww6vqcfr.wav (264644 байт)
+2025-12-15 01:29:33,871 - __main__ - INFO - 📤 Отправляю аудио на сервер...
+2025-12-15 01:29:33,871 - __main__ - INFO - 🌐 URL сервера: http://31.172.75.187:6500/subcategory/8/ask/
+2025-12-15 01:29:33,871 - __main__ - INFO - 📁 Размер аудиофайла: 264644 байт
+2025-12-15 01:29:33,871 - __main__ - INFO - 📤 Отправляю POST запрос на сервер...
+2025-12-15 01:29:33,871 - __main__ - DEBUG - Данные запроса: {'hero_name': 'Герой1', 'language': 'ru'}
+2025-12-15 01:29:33,872 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 31.172.75.187:6500
+2025-12-15 01:29:33,873 - __main__ - INFO - ✅ GUI скрыт
+2025-12-15 01:29:33,981 - urllib3.connectionpool - DEBUG - http://31.172.75.187:6500 "POST /subcategory/8/ask/ HTTP/1.1" 404 5829
+2025-12-15 01:29:34,020 - __main__ - INFO - 📥 Ответ сервера: статус 404
+2025-12-15 01:29:34,021 - __main__ - DEBUG - Заголовки ответа: {'Date': 'Sun, 14 Dec 2025 22:31:25 GMT', 'Server': 'WSGIServer/0.2 CPython/3.12.3', 'Content-Type': 'text/html; charset=utf-8', 'X-Frame-Options': 'DENY', 'Content-Length': '5829', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'same-origin', 'Cross-Origin-Opener-Policy': 'same-origin'}
+2025-12-15 01:29:34,021 - __main__ - ERROR - ❌ Ошибка сервера: 404
+2025-12-15 01:29:34,021 - __main__ - ERROR - Текст ошибки: <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Page not found at /subcategory/8/ask/</title>
+  <meta name="robots" content="NONE,NOARCHIVE">
+  <style>
+    html * { padding:0; margin:0; }
+    body * { padding:10px 20px; }
+    body * * { padding:0; }
+    body { font-family: sans-serif; background:#eee; color:#000; }
+    body > :where(header, main, footer) { border-bottom:1px solid #ddd; }
+    h1 { font-weight:normal; margin-bo
+2025-12-15 01:29:34,021 - __main__ - DEBUG - 🗑 Удалил аудиофайл: /tmp/tmpww6vqcfr.wav
+2025-12-15 01:29:34,021 - __main__ - WARNING - ⚠️ Видео не получено от сервера, жду 5 секунд
+2025-12-15 01:29:39,022 - __main__ - INFO - ❓ ВОПРОС 4/6 ДЛЯ Герой1
+2025-12-15 01:29:39,022 - __main__ - INFO - 🖥 Показываю GUI для вопроса 4
+2025-12-15 01:29:39,023 - __main__ - INFO - 🖥 Показываю GUI для Герой1, вопрос 4/6
+2025-12-15 01:29:39,091 - __main__ - INFO - ✅ GUI успешно отображен
+2025-12-15 01:29:43,023 - __main__ - INFO - 🎤 Создаю аудиофайл...
+2025-12-15 01:29:43,023 - __main__ - INFO - 🎤 Начинаю создание аудиофайла на 3 секунд...
+2025-12-15 01:29:43,024 - __main__ - DEBUG - Создан временный файл: /tmp/tmpni2zgv3h.wav
+2025-12-15 01:29:43,024 - __main__ - DEBUG - Параметры аудио: sample_rate=44100, channels=1, duration_samples=132300, data_size=264600
+2025-12-15 01:29:43,047 - __main__ - INFO - ✅ Аудиофайл создан: /tmp/tmpni2zgv3h.wav (264644 байт)
+2025-12-15 01:29:43,047 - __main__ - INFO - 📤 Отправляю аудио на сервер...
+2025-12-15 01:29:43,047 - __main__ - INFO - 🌐 URL сервера: http://31.172.75.187:6500/subcategory/8/ask/
+2025-12-15 01:29:43,048 - __main__ - INFO - 📁 Размер аудиофайла: 264644 байт
+2025-12-15 01:29:43,048 - __main__ - INFO - 📤 Отправляю POST запрос на сервер...
+2025-12-15 01:29:43,048 - __main__ - DEBUG - Данные запроса: {'hero_name': 'Герой1', 'language': 'ru'}
+2025-12-15 01:29:43,049 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 31.172.75.187:6500
+2025-12-15 01:29:43,050 - __main__ - INFO - ✅ GUI скрыт
+2025-12-15 01:29:43,176 - urllib3.connectionpool - DEBUG - http://31.172.75.187:6500 "POST /subcategory/8/ask/ HTTP/1.1" 404 5829
+2025-12-15 01:29:43,218 - __main__ - INFO - 📥 Ответ сервера: статус 404
+2025-12-15 01:29:43,218 - __main__ - DEBUG - Заголовки ответа: {'Date': 'Sun, 14 Dec 2025 22:31:34 GMT', 'Server': 'WSGIServer/0.2 CPython/3.12.3', 'Content-Type': 'text/html; charset=utf-8', 'X-Frame-Options': 'DENY', 'Content-Length': '5829', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'same-origin', 'Cross-Origin-Opener-Policy': 'same-origin'}
+2025-12-15 01:29:43,218 - __main__ - ERROR - ❌ Ошибка сервера: 404
+2025-12-15 01:29:43,218 - __main__ - ERROR - Текст ошибки: <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Page not found at /subcategory/8/ask/</title>
+  <meta name="robots" content="NONE,NOARCHIVE">
+  <style>
+    html * { padding:0; margin:0; }
+    body * { padding:10px 20px; }
+    body * * { padding:0; }
+    body { font-family: sans-serif; background:#eee; color:#000; }
+    body > :where(header, main, footer) { border-bottom:1px solid #ddd; }
+    h1 { font-weight:normal; margin-bo
+2025-12-15 01:29:43,220 - __main__ - DEBUG - 🗑 Удалил аудиофайл: /tmp/tmpni2zgv3h.wav
+2025-12-15 01:29:43,220 - __main__ - WARNING - ⚠️ Видео не получено от сервера, жду 5 секунд
+2025-12-15 01:29:48,221 - __main__ - INFO - ❓ ВОПРОС 5/6 ДЛЯ Герой1
+2025-12-15 01:29:48,221 - __main__ - INFO - 🖥 Показываю GUI для вопроса 5
+2025-12-15 01:29:48,221 - __main__ - INFO - 🖥 Показываю GUI для Герой1, вопрос 5/6
+2025-12-15 01:29:48,278 - __main__ - INFO - ✅ GUI успешно отображен
+2025-12-15 01:29:52,221 - __main__ - INFO - 🎤 Создаю аудиофайл...
+2025-12-15 01:29:52,222 - __main__ - INFO - 🎤 Начинаю создание аудиофайла на 3 секунд...
+2025-12-15 01:29:52,222 - __main__ - DEBUG - Создан временный файл: /tmp/tmp418tzulj.wav
+2025-12-15 01:29:52,222 - __main__ - DEBUG - Параметры аудио: sample_rate=44100, channels=1, duration_samples=132300, data_size=264600
+2025-12-15 01:29:52,244 - __main__ - INFO - ✅ Аудиофайл создан: /tmp/tmp418tzulj.wav (264644 байт)
+2025-12-15 01:29:52,245 - __main__ - INFO - 📤 Отправляю аудио на сервер...
+2025-12-15 01:29:52,245 - __main__ - INFO - 🌐 URL сервера: http://31.172.75.187:6500/subcategory/8/ask/
+2025-12-15 01:29:52,245 - __main__ - INFO - 📁 Размер аудиофайла: 264644 байт
+2025-12-15 01:29:52,245 - __main__ - INFO - 📤 Отправляю POST запрос на сервер...
+2025-12-15 01:29:52,245 - __main__ - DEBUG - Данные запроса: {'hero_name': 'Герой1', 'language': 'ru'}
+2025-12-15 01:29:52,246 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 31.172.75.187:6500
+2025-12-15 01:29:52,250 - __main__ - INFO - ✅ GUI скрыт
+2025-12-15 01:29:52,353 - urllib3.connectionpool - DEBUG - http://31.172.75.187:6500 "POST /subcategory/8/ask/ HTTP/1.1" 404 5829
+2025-12-15 01:29:52,397 - __main__ - INFO - 📥 Ответ сервера: статус 404
+2025-12-15 01:29:52,397 - __main__ - DEBUG - Заголовки ответа: {'Date': 'Sun, 14 Dec 2025 22:31:43 GMT', 'Server': 'WSGIServer/0.2 CPython/3.12.3', 'Content-Type': 'text/html; charset=utf-8', 'X-Frame-Options': 'DENY', 'Content-Length': '5829', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'same-origin', 'Cross-Origin-Opener-Policy': 'same-origin'}
+2025-12-15 01:29:52,397 - __main__ - ERROR - ❌ Ошибка сервера: 404
+2025-12-15 01:29:52,397 - __main__ - ERROR - Текст ошибки: <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Page not found at /subcategory/8/ask/</title>
+  <meta name="robots" content="NONE,NOARCHIVE">
+  <style>
+    html * { padding:0; margin:0; }
+    body * { padding:10px 20px; }
+    body * * { padding:0; }
+    body { font-family: sans-serif; background:#eee; color:#000; }
+    body > :where(header, main, footer) { border-bottom:1px solid #ddd; }
+    h1 { font-weight:normal; margin-bo
+2025-12-15 01:29:52,398 - __main__ - DEBUG - 🗑 Удалил аудиофайл: /tmp/tmp418tzulj.wav
+2025-12-15 01:29:52,398 - __main__ - WARNING - ⚠️ Видео не получено от сервера, жду 5 секунд
+2025-12-15 01:29:57,401 - __main__ - INFO - ❓ ВОПРОС 6/6 ДЛЯ Герой1
+2025-12-15 01:29:57,401 - __main__ - INFO - 🖥 Показываю GUI для вопроса 6
+2025-12-15 01:29:57,403 - __main__ - INFO - 🖥 Показываю GUI для Герой1, вопрос 6/6
+2025-12-15 01:29:57,467 - __main__ - INFO - ✅ GUI успешно отображен
+2025-12-15 01:30:01,403 - __main__ - INFO - 🎤 Создаю аудиофайл...
+2025-12-15 01:30:01,403 - __main__ - INFO - 🎤 Начинаю создание аудиофайла на 3 секунд...
+2025-12-15 01:30:01,403 - __main__ - DEBUG - Создан временный файл: /tmp/tmpb2frrv85.wav
+2025-12-15 01:30:01,404 - __main__ - DEBUG - Параметры аудио: sample_rate=44100, channels=1, duration_samples=132300, data_size=264600
+2025-12-15 01:30:01,424 - __main__ - INFO - ✅ Аудиофайл создан: /tmp/tmpb2frrv85.wav (264644 байт)
+2025-12-15 01:30:01,425 - __main__ - INFO - 📤 Отправляю аудио на сервер...
+2025-12-15 01:30:01,425 - __main__ - INFO - 🌐 URL сервера: http://31.172.75.187:6500/subcategory/8/ask/
+2025-12-15 01:30:01,425 - __main__ - INFO - 📁 Размер аудиофайла: 264644 байт
+2025-12-15 01:30:01,425 - __main__ - INFO - 📤 Отправляю POST запрос на сервер...
+2025-12-15 01:30:01,425 - __main__ - DEBUG - Данные запроса: {'hero_name': 'Герой1', 'language': 'ru'}
+2025-12-15 01:30:01,426 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 31.172.75.187:6500
+2025-12-15 01:30:01,427 - __main__ - INFO - ✅ GUI скрыт
+2025-12-15 01:30:01,548 - urllib3.connectionpool - DEBUG - http://31.172.75.187:6500 "POST /subcategory/8/ask/ HTTP/1.1" 404 5829
+2025-12-15 01:30:01,591 - __main__ - INFO - 📥 Ответ сервера: статус 404
+2025-12-15 01:30:01,591 - __main__ - DEBUG - Заголовки ответа: {'Date': 'Sun, 14 Dec 2025 22:31:52 GMT', 'Server': 'WSGIServer/0.2 CPython/3.12.3', 'Content-Type': 'text/html; charset=utf-8', 'X-Frame-Options': 'DENY', 'Content-Length': '5829', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'same-origin', 'Cross-Origin-Opener-Policy': 'same-origin'}
+2025-12-15 01:30:01,591 - __main__ - ERROR - ❌ Ошибка сервера: 404
+2025-12-15 01:30:01,591 - __main__ - ERROR - Текст ошибки: <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Page not found at /subcategory/8/ask/</title>
+  <meta name="robots" content="NONE,NOARCHIVE">
+  <style>
+    html * { padding:0; margin:0; }
+    body * { padding:10px 20px; }
+    body * * { padding:0; }
+    body { font-family: sans-serif; background:#eee; color:#000; }
+    body > :where(header, main, footer) { border-bottom:1px solid #ddd; }
+    h1 { font-weight:normal; margin-bo
+2025-12-15 01:30:01,592 - __main__ - DEBUG - 🗑 Удалил аудиофайл: /tmp/tmpb2frrv85.wav
+2025-12-15 01:30:01,592 - __main__ - WARNING - ⚠️ Видео не получено от сервера, жду 5 секунд
+2025-12-15 01:30:06,592 - __main__ - INFO - ✅ СЕССИЯ ЗАВЕРШЕНА ДЛЯ ГЕРОЯ: Герой1
+2025-12-15 01:30:06,592 - __main__ - INFO - ✅ [1/3] СЕССИЯ ЗАВЕРШЕНА: Герой1
+2025-12-15 01:30:06,593 - __main__ - INFO - 
+🎭 [2/3] НАЧИНАЮ СЕССИЮ ДЛЯ: Герой2
+2025-12-15 01:30:06,593 - __main__ - INFO - 🚀 НАЧИНАЮ СЕССИЮ ДЛЯ ГЕРОЯ: Герой2
+2025-12-15 01:30:06,593 - __main__ - INFO - ❓ ВОПРОС 1/6 ДЛЯ Герой2
+2025-12-15 01:30:06,593 - __main__ - INFO - 🖥 Показываю GUI для вопроса 1
+2025-12-15 01:30:06,593 - __main__ - INFO - 🖥 Показываю GUI для Герой2, вопрос 1/6
+2025-12-15 01:30:06,669 - __main__ - INFO - ✅ GUI успешно отображен
+2025-12-15 01:30:10,593 - __main__ - INFO - 🎤 Создаю аудиофайл...
+2025-12-15 01:30:10,594 - __main__ - INFO - 🎤 Начинаю создание аудиофайла на 3 секунд...
+2025-12-15 01:30:10,594 - __main__ - DEBUG - Создан временный файл: /tmp/tmpm99la2jq.wav
+2025-12-15 01:30:10,594 - __main__ - DEBUG - Параметры аудио: sample_rate=44100, channels=1, duration_samples=132300, data_size=264600
+2025-12-15 01:30:10,624 - __main__ - INFO - ✅ Аудиофайл создан: /tmp/tmpm99la2jq.wav (264644 байт)
+2025-12-15 01:30:10,625 - __main__ - INFO - 📤 Отправляю аудио на сервер...
+2025-12-15 01:30:10,625 - __main__ - INFO - 🌐 URL сервера: http://31.172.75.187:6500/subcategory/8/ask/
+2025-12-15 01:30:10,625 - __main__ - INFO - 📁 Размер аудиофайла: 264644 байт
+2025-12-15 01:30:10,625 - __main__ - INFO - 📤 Отправляю POST запрос на сервер...
+2025-12-15 01:30:10,626 - __main__ - DEBUG - Данные запроса: {'hero_name': 'Герой2', 'language': 'ru'}
+2025-12-15 01:30:10,627 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 31.172.75.187:6500
+2025-12-15 01:30:10,628 - __main__ - INFO - ✅ GUI скрыт
+2025-12-15 01:30:10,731 - urllib3.connectionpool - DEBUG - http://31.172.75.187:6500 "POST /subcategory/8/ask/ HTTP/1.1" 404 5829
+2025-12-15 01:30:10,772 - __main__ - INFO - 📥 Ответ сервера: статус 404
+2025-12-15 01:30:10,773 - __main__ - DEBUG - Заголовки ответа: {'Date': 'Sun, 14 Dec 2025 22:32:01 GMT', 'Server': 'WSGIServer/0.2 CPython/3.12.3', 'Content-Type': 'text/html; charset=utf-8', 'X-Frame-Options': 'DENY', 'Content-Length': '5829', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'same-origin', 'Cross-Origin-Opener-Policy': 'same-origin'}
+2025-12-15 01:30:10,773 - __main__ - ERROR - ❌ Ошибка сервера: 404
+2025-12-15 01:30:10,773 - __main__ - ERROR - Текст ошибки: <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Page not found at /subcategory/8/ask/</title>
+  <meta name="robots" content="NONE,NOARCHIVE">
+  <style>
+    html * { padding:0; margin:0; }
+    body * { padding:10px 20px; }
+    body * * { padding:0; }
+    body { font-family: sans-serif; background:#eee; color:#000; }
+    body > :where(header, main, footer) { border-bottom:1px solid #ddd; }
+    h1 { font-weight:normal; margin-bo
+2025-12-15 01:30:10,774 - __main__ - DEBUG - 🗑 Удалил аудиофайл: /tmp/tmpm99la2jq.wav
+2025-12-15 01:30:10,774 - __main__ - WARNING - ⚠️ Видео не получено от сервера, жду 5 секунд
+2025-12-15 01:30:15,775 - __main__ - INFO - ❓ ВОПРОС 2/6 ДЛЯ Герой2
+2025-12-15 01:30:15,775 - __main__ - INFO - 🖥 Показываю GUI для вопроса 2
+2025-12-15 01:30:15,775 - __main__ - INFO - 🖥 Показываю GUI для Герой2, вопрос 2/6
+2025-12-15 01:30:15,850 - __main__ - INFO - ✅ GUI успешно отображен
+2025-12-15 01:30:19,775 - __main__ - INFO - 🎤 Создаю аудиофайл...
+2025-12-15 01:30:19,776 - __main__ - INFO - 🎤 Начинаю создание аудиофайла на 3 секунд...
+2025-12-15 01:30:19,776 - __main__ - DEBUG - Создан временный файл: /tmp/tmpva_p_m03.wav
+2025-12-15 01:30:19,776 - __main__ - DEBUG - Параметры аудио: sample_rate=44100, channels=1, duration_samples=132300, data_size=264600
+2025-12-15 01:30:19,803 - __main__ - INFO - ✅ Аудиофайл создан: /tmp/tmpva_p_m03.wav (264644 байт)
+2025-12-15 01:30:19,803 - __main__ - INFO - 📤 Отправляю аудио на сервер...
+2025-12-15 01:30:19,803 - __main__ - INFO - 🌐 URL сервера: http://31.172.75.187:6500/subcategory/8/ask/
+2025-12-15 01:30:19,804 - __main__ - INFO - 📁 Размер аудиофайла: 264644 байт
+2025-12-15 01:30:19,804 - __main__ - INFO - 📤 Отправляю POST запрос на сервер...
+2025-12-15 01:30:19,804 - __main__ - DEBUG - Данные запроса: {'hero_name': 'Герой2', 'language': 'ru'}
+2025-12-15 01:30:19,805 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 31.172.75.187:6500
+2025-12-15 01:30:19,808 - __main__ - INFO - ✅ GUI скрыт
+2025-12-15 01:30:19,935 - urllib3.connectionpool - DEBUG - http://31.172.75.187:6500 "POST /subcategory/8/ask/ HTTP/1.1" 404 5829
+2025-12-15 01:30:19,981 - __main__ - INFO - 📥 Ответ сервера: статус 404
+2025-12-15 01:30:19,981 - __main__ - DEBUG - Заголовки ответа: {'Date': 'Sun, 14 Dec 2025 22:32:10 GMT', 'Server': 'WSGIServer/0.2 CPython/3.12.3', 'Content-Type': 'text/html; charset=utf-8', 'X-Frame-Options': 'DENY', 'Content-Length': '5829', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'same-origin', 'Cross-Origin-Opener-Policy': 'same-origin'}
+2025-12-15 01:30:19,981 - __main__ - ERROR - ❌ Ошибка сервера: 404
+2025-12-15 01:30:19,982 - __main__ - ERROR - Текст ошибки: <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Page not found at /subcategory/8/ask/</title>
+  <meta name="robots" content="NONE,NOARCHIVE">
+  <style>
+    html * { padding:0; margin:0; }
+    body * { padding:10px 20px; }
+    body * * { padding:0; }
+    body { font-family: sans-serif; background:#eee; color:#000; }
+    body > :where(header, main, footer) { border-bottom:1px solid #ddd; }
+    h1 { font-weight:normal; margin-bo
+2025-12-15 01:30:19,982 - __main__ - DEBUG - 🗑 Удалил аудиофайл: /tmp/tmpva_p_m03.wav
+2025-12-15 01:30:19,982 - __main__ - WARNING - ⚠️ Видео не получено от сервера, жду 5 секунд
+2025-12-15 01:30:24,982 - __main__ - INFO - ❓ ВОПРОС 3/6 ДЛЯ Герой2
+2025-12-15 01:30:24,983 - __main__ - INFO - 🖥 Показываю GUI для вопроса 3
+2025-12-15 01:30:24,983 - __main__ - INFO - 🖥 Показываю GUI для Герой2, вопрос 3/6
+2025-12-15 01:30:25,046 - __main__ - INFO - ✅ GUI успешно отображен
+2025-12-15 01:30:28,983 - __main__ - INFO - 🎤 Создаю аудиофайл...
+2025-12-15 01:30:28,984 - __main__ - INFO - 🎤 Начинаю создание аудиофайла на 3 секунд...
+2025-12-15 01:30:28,984 - __main__ - DEBUG - Создан временный файл: /tmp/tmphz7w48al.wav
+2025-12-15 01:30:28,984 - __main__ - DEBUG - Параметры аудио: sample_rate=44100, channels=1, duration_samples=132300, data_size=264600
+2025-12-15 01:30:29,007 - __main__ - INFO - ✅ Аудиофайл создан: /tmp/tmphz7w48al.wav (264644 байт)
+2025-12-15 01:30:29,007 - __main__ - INFO - 📤 Отправляю аудио на сервер...
+2025-12-15 01:30:29,007 - __main__ - INFO - 🌐 URL сервера: http://31.172.75.187:6500/subcategory/8/ask/
+2025-12-15 01:30:29,007 - __main__ - INFO - 📁 Размер аудиофайла: 264644 байт
+2025-12-15 01:30:29,007 - __main__ - INFO - 📤 Отправляю POST запрос на сервер...
+2025-12-15 01:30:29,007 - __main__ - DEBUG - Данные запроса: {'hero_name': 'Герой2', 'language': 'ru'}
+2025-12-15 01:30:29,008 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 31.172.75.187:6500
+2025-12-15 01:30:29,012 - __main__ - INFO - ✅ GUI скрыт
+2025-12-15 01:30:29,110 - urllib3.connectionpool - DEBUG - http://31.172.75.187:6500 "POST /subcategory/8/ask/ HTTP/1.1" 404 5829
+2025-12-15 01:30:29,156 - __main__ - INFO - 📥 Ответ сервера: статус 404
+2025-12-15 01:30:29,156 - __main__ - DEBUG - Заголовки ответа: {'Date': 'Sun, 14 Dec 2025 22:32:20 GMT', 'Server': 'WSGIServer/0.2 CPython/3.12.3', 'Content-Type': 'text/html; charset=utf-8', 'X-Frame-Options': 'DENY', 'Content-Length': '5829', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'same-origin', 'Cross-Origin-Opener-Policy': 'same-origin'}
+2025-12-15 01:30:29,156 - __main__ - ERROR - ❌ Ошибка сервера: 404
+2025-12-15 01:30:29,156 - __main__ - ERROR - Текст ошибки: <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Page not found at /subcategory/8/ask/</title>
+  <meta name="robots" content="NONE,NOARCHIVE">
+  <style>
+    html * { padding:0; margin:0; }
+    body * { padding:10px 20px; }
+    body * * { padding:0; }
+    body { font-family: sans-serif; background:#eee; color:#000; }
+    body > :where(header, main, footer) { border-bottom:1px solid #ddd; }
+    h1 { font-weight:normal; margin-bo
+2025-12-15 01:30:29,157 - __main__ - DEBUG - 🗑 Удалил аудиофайл: /tmp/tmphz7w48al.wav
+2025-12-15 01:30:29,157 - __main__ - WARNING - ⚠️ Видео не получено от сервера, жду 5 секунд
+2025-12-15 01:30:34,157 - __main__ - INFO - ❓ ВОПРОС 4/6 ДЛЯ Герой2
+2025-12-15 01:30:34,157 - __main__ - INFO - 🖥 Показываю GUI для вопроса 4
+2025-12-15 01:30:34,157 - __main__ - INFO - 🖥 Показываю GUI для Герой2, вопрос 4/6
+2025-12-15 01:30:34,236 - __main__ - INFO - ✅ GUI успешно отображен
+2025-12-15 01:30:38,159 - __main__ - INFO - 🎤 Создаю аудиофайл...
+2025-12-15 01:30:38,159 - __main__ - INFO - 🎤 Начинаю создание аудиофайла на 3 секунд...
+2025-12-15 01:30:38,159 - __main__ - DEBUG - Создан временный файл: /tmp/tmph624kmn5.wav
+2025-12-15 01:30:38,159 - __main__ - DEBUG - Параметры аудио: sample_rate=44100, channels=1, duration_samples=132300, data_size=264600
+2025-12-15 01:30:38,186 - __main__ - INFO - ✅ Аудиофайл создан: /tmp/tmph624kmn5.wav (264644 байт)
+2025-12-15 01:30:38,187 - __main__ - INFO - 📤 Отправляю аудио на сервер...
+2025-12-15 01:30:38,187 - __main__ - INFO - 🌐 URL сервера: http://31.172.75.187:6500/subcategory/8/ask/
+2025-12-15 01:30:38,187 - __main__ - INFO - 📁 Размер аудиофайла: 264644 байт
+2025-12-15 01:30:38,187 - __main__ - INFO - 📤 Отправляю POST запрос на сервер...
+2025-12-15 01:30:38,187 - __main__ - DEBUG - Данные запроса: {'hero_name': 'Герой2', 'language': 'ru'}
+2025-12-15 01:30:38,188 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 31.172.75.187:6500
+2025-12-15 01:30:38,189 - __main__ - INFO - ✅ GUI скрыт
+2025-12-15 01:30:38,308 - urllib3.connectionpool - DEBUG - http://31.172.75.187:6500 "POST /subcategory/8/ask/ HTTP/1.1" 404 5829
+2025-12-15 01:30:38,349 - __main__ - INFO - 📥 Ответ сервера: статус 404
+2025-12-15 01:30:38,349 - __main__ - DEBUG - Заголовки ответа: {'Date': 'Sun, 14 Dec 2025 22:32:29 GMT', 'Server': 'WSGIServer/0.2 CPython/3.12.3', 'Content-Type': 'text/html; charset=utf-8', 'X-Frame-Options': 'DENY', 'Content-Length': '5829', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'same-origin', 'Cross-Origin-Opener-Policy': 'same-origin'}
+2025-12-15 01:30:38,349 - __main__ - ERROR - ❌ Ошибка сервера: 404
+2025-12-15 01:30:38,350 - __main__ - ERROR - Текст ошибки: <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Page not found at /subcategory/8/ask/</title>
+  <meta name="robots" content="NONE,NOARCHIVE">
+  <style>
+    html * { padding:0; margin:0; }
+    body * { padding:10px 20px; }
+    body * * { padding:0; }
+    body { font-family: sans-serif; background:#eee; color:#000; }
+    body > :where(header, main, footer) { border-bottom:1px solid #ddd; }
+    h1 { font-weight:normal; margin-bo
+2025-12-15 01:30:38,351 - __main__ - DEBUG - 🗑 Удалил аудиофайл: /tmp/tmph624kmn5.wav
+2025-12-15 01:30:38,351 - __main__ - WARNING - ⚠️ Видео не получено от сервера, жду 5 секунд
+2025-12-15 01:30:43,352 - __main__ - INFO - ❓ ВОПРОС 5/6 ДЛЯ Герой2
+2025-12-15 01:30:43,352 - __main__ - INFO - 🖥 Показываю GUI для вопроса 5
+2025-12-15 01:30:43,353 - __main__ - INFO - 🖥 Показываю GUI для Герой2, вопрос 5/6
+2025-12-15 01:30:43,429 - __main__ - INFO - ✅ GUI успешно отображен
+2025-12-15 01:30:47,353 - __main__ - INFO - 🎤 Создаю аудиофайл...
+2025-12-15 01:30:47,353 - __main__ - INFO - 🎤 Начинаю создание аудиофайла на 3 секунд...
+2025-12-15 01:30:47,353 - __main__ - DEBUG - Создан временный файл: /tmp/tmpcvyivlkw.wav
+2025-12-15 01:30:47,353 - __main__ - DEBUG - Параметры аудио: sample_rate=44100, channels=1, duration_samples=132300, data_size=264600
+2025-12-15 01:30:47,377 - __main__ - INFO - ✅ Аудиофайл создан: /tmp/tmpcvyivlkw.wav (264644 байт)
+2025-12-15 01:30:47,382 - __main__ - INFO - 📤 Отправляю аудио на сервер...
+2025-12-15 01:30:47,383 - __main__ - INFO - 🌐 URL сервера: http://31.172.75.187:6500/subcategory/8/ask/
+2025-12-15 01:30:47,383 - __main__ - INFO - 📁 Размер аудиофайла: 264644 байт
+2025-12-15 01:30:47,383 - __main__ - INFO - 📤 Отправляю POST запрос на сервер...
+2025-12-15 01:30:47,383 - __main__ - DEBUG - Данные запроса: {'hero_name': 'Герой2', 'language': 'ru'}
+2025-12-15 01:30:47,384 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 31.172.75.187:6500
+2025-12-15 01:30:47,385 - __main__ - INFO - ✅ GUI скрыт
+2025-12-15 01:30:47,486 - urllib3.connectionpool - DEBUG - http://31.172.75.187:6500 "POST /subcategory/8/ask/ HTTP/1.1" 404 5829
+2025-12-15 01:30:47,529 - __main__ - INFO - 📥 Ответ сервера: статус 404
+2025-12-15 01:30:47,529 - __main__ - DEBUG - Заголовки ответа: {'Date': 'Sun, 14 Dec 2025 22:32:38 GMT', 'Server': 'WSGIServer/0.2 CPython/3.12.3', 'Content-Type': 'text/html; charset=utf-8', 'X-Frame-Options': 'DENY', 'Content-Length': '5829', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'same-origin', 'Cross-Origin-Opener-Policy': 'same-origin'}
+2025-12-15 01:30:47,529 - __main__ - ERROR - ❌ Ошибка сервера: 404
+2025-12-15 01:30:47,529 - __main__ - ERROR - Текст ошибки: <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Page not found at /subcategory/8/ask/</title>
+  <meta name="robots" content="NONE,NOARCHIVE">
+  <style>
+    html * { padding:0; margin:0; }
+    body * { padding:10px 20px; }
+    body * * { padding:0; }
+    body { font-family: sans-serif; background:#eee; color:#000; }
+    body > :where(header, main, footer) { border-bottom:1px solid #ddd; }
+    h1 { font-weight:normal; margin-bo
+2025-12-15 01:30:47,531 - __main__ - DEBUG - 🗑 Удалил аудиофайл: /tmp/tmpcvyivlkw.wav
+2025-12-15 01:30:47,531 - __main__ - WARNING - ⚠️ Видео не получено от сервера, жду 5 секунд
+2025-12-15 01:30:52,531 - __main__ - INFO - ❓ ВОПРОС 6/6 ДЛЯ Герой2
+2025-12-15 01:30:52,532 - __main__ - INFO - 🖥 Показываю GUI для вопроса 6
+2025-12-15 01:30:52,532 - __main__ - INFO - 🖥 Показываю GUI для Герой2, вопрос 6/6
+2025-12-15 01:30:52,608 - __main__ - INFO - ✅ GUI успешно отображен
+2025-12-15 01:30:56,534 - __main__ - INFO - 🎤 Создаю аудиофайл...
+2025-12-15 01:30:56,534 - __main__ - INFO - 🎤 Начинаю создание аудиофайла на 3 секунд...
+2025-12-15 01:30:56,535 - __main__ - DEBUG - Создан временный файл: /tmp/tmpguam06gc.wav
+2025-12-15 01:30:56,535 - __main__ - DEBUG - Параметры аудио: sample_rate=44100, channels=1, duration_samples=132300, data_size=264600
+2025-12-15 01:30:56,561 - __main__ - INFO - ✅ Аудиофайл создан: /tmp/tmpguam06gc.wav (264644 байт)
+2025-12-15 01:30:56,561 - __main__ - INFO - 📤 Отправляю аудио на сервер...
+2025-12-15 01:30:56,561 - __main__ - INFO - 🌐 URL сервера: http://31.172.75.187:6500/subcategory/8/ask/
+2025-12-15 01:30:56,561 - __main__ - INFO - 📁 Размер аудиофайла: 264644 байт
+2025-12-15 01:30:56,561 - __main__ - INFO - 📤 Отправляю POST запрос на сервер...
+2025-12-15 01:30:56,561 - __main__ - DEBUG - Данные запроса: {'hero_name': 'Герой2', 'language': 'ru'}
+2025-12-15 01:30:56,563 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 31.172.75.187:6500
+2025-12-15 01:30:56,564 - __main__ - INFO - ✅ GUI скрыт
+2025-12-15 01:30:56,668 - urllib3.connectionpool - DEBUG - http://31.172.75.187:6500 "POST /subcategory/8/ask/ HTTP/1.1" 404 5829
+2025-12-15 01:30:56,713 - __main__ - INFO - 📥 Ответ сервера: статус 404
+2025-12-15 01:30:56,713 - __main__ - DEBUG - Заголовки ответа: {'Date': 'Sun, 14 Dec 2025 22:32:47 GMT', 'Server': 'WSGIServer/0.2 CPython/3.12.3', 'Content-Type': 'text/html; charset=utf-8', 'X-Frame-Options': 'DENY', 'Content-Length': '5829', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'same-origin', 'Cross-Origin-Opener-Policy': 'same-origin'}
+2025-12-15 01:30:56,713 - __main__ - ERROR - ❌ Ошибка сервера: 404
+2025-12-15 01:30:56,713 - __main__ - ERROR - Текст ошибки: <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Page not found at /subcategory/8/ask/</title>
+  <meta name="robots" content="NONE,NOARCHIVE">
+  <style>
+    html * { padding:0; margin:0; }
+    body * { padding:10px 20px; }
+    body * * { padding:0; }
+    body { font-family: sans-serif; background:#eee; color:#000; }
+    body > :where(header, main, footer) { border-bottom:1px solid #ddd; }
+    h1 { font-weight:normal; margin-bo
+2025-12-15 01:30:56,714 - __main__ - DEBUG - 🗑 Удалил аудиофайл: /tmp/tmpguam06gc.wav
+2025-12-15 01:30:56,714 - __main__ - WARNING - ⚠️ Видео не получено от сервера, жду 5 секунд
+2025-12-15 01:31:01,715 - __main__ - INFO - ✅ СЕССИЯ ЗАВЕРШЕНА ДЛЯ ГЕРОЯ: Герой2
+2025-12-15 01:31:01,715 - __main__ - INFO - ✅ [2/3] СЕССИЯ ЗАВЕРШЕНА: Герой2
+2025-12-15 01:31:01,715 - __main__ - INFO - 
+🎭 [3/3] НАЧИНАЮ СЕССИЮ ДЛЯ: Герой3
+2025-12-15 01:31:01,715 - __main__ - INFO - 🚀 НАЧИНАЮ СЕССИЮ ДЛЯ ГЕРОЯ: Герой3
+2025-12-15 01:31:01,715 - __main__ - INFO - ❓ ВОПРОС 1/6 ДЛЯ Герой3
+2025-12-15 01:31:01,715 - __main__ - INFO - 🖥 Показываю GUI для вопроса 1
+2025-12-15 01:31:01,716 - __main__ - INFO - 🖥 Показываю GUI для Герой3, вопрос 1/6
+2025-12-15 01:31:01,799 - __main__ - INFO - ✅ GUI успешно отображен
+2025-12-15 01:31:05,716 - __main__ - INFO - 🎤 Создаю аудиофайл...
+2025-12-15 01:31:05,718 - __main__ - INFO - 🎤 Начинаю создание аудиофайла на 3 секунд...
+2025-12-15 01:31:05,718 - __main__ - DEBUG - Создан временный файл: /tmp/tmpyy_d2ims.wav
+2025-12-15 01:31:05,718 - __main__ - DEBUG - Параметры аудио: sample_rate=44100, channels=1, duration_samples=132300, data_size=264600
+2025-12-15 01:31:05,744 - __main__ - INFO - ✅ Аудиофайл создан: /tmp/tmpyy_d2ims.wav (264644 байт)
+2025-12-15 01:31:05,745 - __main__ - INFO - 📤 Отправляю аудио на сервер...
+2025-12-15 01:31:05,745 - __main__ - INFO - 🌐 URL сервера: http://31.172.75.187:6500/subcategory/8/ask/
+2025-12-15 01:31:05,745 - __main__ - INFO - 📁 Размер аудиофайла: 264644 байт
+2025-12-15 01:31:05,745 - __main__ - INFO - 📤 Отправляю POST запрос на сервер...
+2025-12-15 01:31:05,745 - __main__ - DEBUG - Данные запроса: {'hero_name': 'Герой3', 'language': 'ru'}
+2025-12-15 01:31:05,747 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 31.172.75.187:6500
+2025-12-15 01:31:05,747 - __main__ - INFO - ✅ GUI скрыт
+2025-12-15 01:31:05,846 - urllib3.connectionpool - DEBUG - http://31.172.75.187:6500 "POST /subcategory/8/ask/ HTTP/1.1" 404 5829
+2025-12-15 01:31:05,893 - __main__ - INFO - 📥 Ответ сервера: статус 404
+2025-12-15 01:31:05,894 - __main__ - DEBUG - Заголовки ответа: {'Date': 'Sun, 14 Dec 2025 22:32:56 GMT', 'Server': 'WSGIServer/0.2 CPython/3.12.3', 'Content-Type': 'text/html; charset=utf-8', 'X-Frame-Options': 'DENY', 'Content-Length': '5829', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'same-origin', 'Cross-Origin-Opener-Policy': 'same-origin'}
+2025-12-15 01:31:05,894 - __main__ - ERROR - ❌ Ошибка сервера: 404
+2025-12-15 01:31:05,894 - __main__ - ERROR - Текст ошибки: <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Page not found at /subcategory/8/ask/</title>
+  <meta name="robots" content="NONE,NOARCHIVE">
+  <style>
+    html * { padding:0; margin:0; }
+    body * { padding:10px 20px; }
+    body * * { padding:0; }
+    body { font-family: sans-serif; background:#eee; color:#000; }
+    body > :where(header, main, footer) { border-bottom:1px solid #ddd; }
+    h1 { font-weight:normal; margin-bo
+2025-12-15 01:31:05,894 - __main__ - DEBUG - 🗑 Удалил аудиофайл: /tmp/tmpyy_d2ims.wav
+2025-12-15 01:31:05,894 - __main__ - WARNING - ⚠️ Видео не получено от сервера, жду 5 секунд
+2025-12-15 01:31:10,896 - __main__ - INFO - ❓ ВОПРОС 2/6 ДЛЯ Герой3
+2025-12-15 01:31:10,896 - __main__ - INFO - 🖥 Показываю GUI для вопроса 2
+2025-12-15 01:31:10,897 - __main__ - INFO - 🖥 Показываю GUI для Герой3, вопрос 2/6
+2025-12-15 01:31:10,997 - __main__ - INFO - ✅ GUI успешно отображен
+2025-12-15 01:31:14,897 - __main__ - INFO - 🎤 Создаю аудиофайл...
+2025-12-15 01:31:14,897 - __main__ - INFO - 🎤 Начинаю создание аудиофайла на 3 секунд...
+2025-12-15 01:31:14,898 - __main__ - DEBUG - Создан временный файл: /tmp/tmpxdpjq8ta.wav
+2025-12-15 01:31:14,898 - __main__ - DEBUG - Параметры аудио: sample_rate=44100, channels=1, duration_samples=132300, data_size=264600
+2025-12-15 01:31:14,918 - __main__ - INFO - ✅ Аудиофайл создан: /tmp/tmpxdpjq8ta.wav (264644 байт)
+2025-12-15 01:31:14,919 - __main__ - INFO - 📤 Отправляю аудио на сервер...
+2025-12-15 01:31:14,919 - __main__ - INFO - 🌐 URL сервера: http://31.172.75.187:6500/subcategory/8/ask/
+2025-12-15 01:31:14,919 - __main__ - INFO - 📁 Размер аудиофайла: 264644 байт
+2025-12-15 01:31:14,919 - __main__ - INFO - 📤 Отправляю POST запрос на сервер...
+2025-12-15 01:31:14,919 - __main__ - DEBUG - Данные запроса: {'hero_name': 'Герой3', 'language': 'ru'}
+2025-12-15 01:31:14,920 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 31.172.75.187:6500
+2025-12-15 01:31:14,926 - __main__ - INFO - ✅ GUI скрыт
+2025-12-15 01:31:15,030 - urllib3.connectionpool - DEBUG - http://31.172.75.187:6500 "POST /subcategory/8/ask/ HTTP/1.1" 404 5829
+2025-12-15 01:31:15,070 - __main__ - INFO - 📥 Ответ сервера: статус 404
+2025-12-15 01:31:15,070 - __main__ - DEBUG - Заголовки ответа: {'Date': 'Sun, 14 Dec 2025 22:33:06 GMT', 'Server': 'WSGIServer/0.2 CPython/3.12.3', 'Content-Type': 'text/html; charset=utf-8', 'X-Frame-Options': 'DENY', 'Content-Length': '5829', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'same-origin', 'Cross-Origin-Opener-Policy': 'same-origin'}
+2025-12-15 01:31:15,070 - __main__ - ERROR - ❌ Ошибка сервера: 404
+2025-12-15 01:31:15,070 - __main__ - ERROR - Текст ошибки: <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Page not found at /subcategory/8/ask/</title>
+  <meta name="robots" content="NONE,NOARCHIVE">
+  <style>
+    html * { padding:0; margin:0; }
+    body * { padding:10px 20px; }
+    body * * { padding:0; }
+    body { font-family: sans-serif; background:#eee; color:#000; }
+    body > :where(header, main, footer) { border-bottom:1px solid #ddd; }
+    h1 { font-weight:normal; margin-bo
+2025-12-15 01:31:15,071 - __main__ - DEBUG - 🗑 Удалил аудиофайл: /tmp/tmpxdpjq8ta.wav
+2025-12-15 01:31:15,071 - __main__ - WARNING - ⚠️ Видео не получено от сервера, жду 5 секунд
+2025-12-15 01:31:20,071 - __main__ - INFO - ❓ ВОПРОС 3/6 ДЛЯ Герой3
