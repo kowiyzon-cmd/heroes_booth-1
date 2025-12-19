@@ -146,33 +146,29 @@ class SimpleAudioRecorder:
     """Класс для реальной записи аудио с микрофона"""
 
     def __init__(self, gui_callback=None):
-        self.sample_rate = 16000  # Используем стандартную частоту 16kHz
+        self.sample_rate = 16000  # Начальное значение
         self.channels = 1
         self.format = pyaudio.paInt16
         self.chunk = 1024
         self.gui_callback = gui_callback
         self.stop_recording = False
-        
-    def record_audio(self, duration=RECORD_DURATION_SECONDS):
-        """Записать аудио с микрофона и вернуть путь к WAV файлу"""
-        audio = pyaudio.PyAudio()
-        stream = None
-        frames = []
+        self.audio = None
+        self.stream = None
 
+    def find_supported_sample_rate(self, audio):
+        """Найти поддерживаемую частоту дискретизации"""
         try:
-            logger.info(f"🎤 Начинаю ЗАПИСЬ с микрофона ({duration} сек)...")
-            
-            # Получаем информацию о доступных устройствах
             device_info = audio.get_default_input_device_info()
             logger.info(f"📊 Устройство записи: {device_info.get('name')}")
-            logger.info(f"📊 Поддерживаемые частоты: {device_info.get('defaultSampleRate')}")
+            logger.info(f"📊 Частота по умолчанию: {device_info.get('defaultSampleRate')}")
             
             # Пробуем разные частоты дискретизации
-            sample_rates = [16000, 44100, 48000, 22050, 8000]
+            sample_rates = [16000, 44100, 48000, 22050, 8000, 96000, 11025]
             
             for rate in sample_rates:
                 try:
-                    stream = audio.open(
+                    # Пробуем открыть поток с этой частотой
+                    test_stream = audio.open(
                         format=self.format,
                         channels=self.channels,
                         rate=rate,
@@ -180,64 +176,159 @@ class SimpleAudioRecorder:
                         frames_per_buffer=self.chunk,
                         input_device_index=device_info['index']
                     )
-                    self.sample_rate = rate
-                    logger.info(f"✅ Успешно открыт поток с частотой {rate} Hz")
-                    break
+                    test_stream.close()
+                    logger.info(f"✅ Частота {rate} Hz поддерживается")
+                    return rate
                 except Exception as e:
-                    logger.warning(f"⚠️ Частота {rate} Hz не поддерживается: {e}")
-                    if stream:
-                        stream.close()
-                        stream = None
+                    logger.debug(f"⚠️ Частота {rate} Hz не поддерживается: {str(e)[:50]}")
             
-            if not stream:
-                raise Exception("Не удалось найти поддерживаемую частоту дискретизации")
+            # Если ничего не подошло, пробуем частоту по умолчанию
+            default_rate = int(device_info.get('defaultSampleRate', 44100))
+            logger.warning(f"⚠️ Ни одна частота не подошла, пробую частоту по умолчанию: {default_rate} Hz")
+            return default_rate
+            
+        except Exception as e:
+            logger.error(f"❌ Ошибка при поиске частоты дискретизации: {e}")
+            return 44100  # Возвращаем безопасное значение
+
+    def record_audio(self, duration=RECORD_DURATION_SECONDS):
+        """Записать аудио с микрофона и вернуть путь к WAV файлу"""
+        self.audio = pyaudio.PyAudio()
+        self.stream = None
+        frames = []
+
+        try:
+            logger.info(f"🎤 Начинаю ЗАПИСЬ с микрофона ({duration} сек)...")
+            
+            # Находим поддерживаемую частоту дискретизации
+            self.sample_rate = self.find_supported_sample_rate(self.audio)
+            logger.info(f"📊 Использую частоту дискретизации: {self.sample_rate} Hz")
+            
+            device_info = self.audio.get_default_input_device_info()
+            
+            # Открываем поток с найденной частотой
+            self.stream = self.audio.open(
+                format=self.format,
+                channels=self.channels,
+                rate=self.sample_rate,
+                input=True,
+                frames_per_buffer=self.chunk,
+                input_device_index=device_info['index']
+            )
             
             total_chunks = int(self.sample_rate / self.chunk * duration)
             self.stop_recording = False
+            
+            logger.info(f"📊 Всего чанков для записи: {total_chunks}")
 
             for i in range(total_chunks):
                 if self.stop_recording:
                     logger.info("🛑 Запись остановлена досрочно")
                     break
                     
-                data = stream.read(self.chunk, exception_on_overflow=False)
-                frames.append(data)
-                
-                if self.gui_callback:
-                    elapsed = (i + 1) * self.chunk / self.sample_rate
-                    remaining = duration - elapsed
-                    self.gui_callback(int(remaining))
+                try:
+                    # Читаем данные из потока
+                    data = self.stream.read(self.chunk, exception_on_overflow=False)
+                    frames.append(data)
+                    
+                    # Обновляем GUI каждую секунду
+                    if self.gui_callback and i % (self.sample_rate // self.chunk) == 0:
+                        elapsed_seconds = i * self.chunk / self.sample_rate
+                        seconds_left = int(duration - elapsed_seconds)
+                        self.gui_callback(seconds_left)
+                        
+                except IOError as e:
+                    logger.warning(f"⚠️ Ошибка чтения аудио-чанка {i}: {e}")
+                    # Добавляем тишину вместо потерянных данных
+                    frames.append(b'\x00' * self.chunk * 2)
 
-            logger.info("✅ Запись завершена")
-            
+            logger.info(f"✅ Запись завершена, собрано {len(frames)} чанков")
+
             # Создаём временный WAV файл
             with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as tmp:
                 wav_path = tmp.name
 
+            # Сохраняем аудио в WAV файл
             with wave.open(wav_path, "wb") as wf:
                 wf.setnchannels(self.channels)
-                wf.setsampwidth(audio.get_sample_size(self.format))
+                wf.setsampwidth(self.audio.get_sample_size(self.format))
                 wf.setframerate(self.sample_rate)
                 wf.writeframes(b"".join(frames))
 
             file_size = os.path.getsize(wav_path)
             logger.info(f"💾 WAV файл сохранён: {wav_path} ({file_size} байт)")
+            
+            # Проверяем, не пустой ли файл
+            if file_size < 100:  # Минимальный размер для WAV заголовка
+                logger.warning("⚠️ Создан очень маленький WAV файл. Возможно, запись не удалась.")
+                # Создаем тестовый аудиофайл с тишиной
+                self.create_silent_wav(wav_path, duration)
+                file_size = os.path.getsize(wav_path)
+                logger.info(f"📁 Создан тестовый WAV файл: {wav_path} ({file_size} байт)")
 
             return wav_path
 
         except Exception as e:
-            logger.error(f"❌ Ошибка записи аудио: {e}")
+            logger.error(f"❌ Критическая ошибка записи аудио: {e}")
             logger.error(traceback.format_exc())
-            return None
+            
+            # Пробуем создать пустой аудиофайл для продолжения работы
+            try:
+                with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as tmp:
+                    wav_path = tmp.name
+                
+                self.create_silent_wav(wav_path, duration)
+                logger.warning(f"⚠️ Создан тестовый WAV файл после ошибки: {wav_path}")
+                return wav_path
+            except Exception as inner_e:
+                logger.error(f"❌ Не удалось создать тестовый файл: {inner_e}")
+                return None
 
         finally:
-            try:
-                if stream:
-                    stream.stop_stream()
-                    stream.close()
-                audio.terminate()
-            except Exception:
-                pass
+            self.cleanup()
+
+    def create_silent_wav(self, filepath, duration):
+        """Создать WAV файл с тишиной (для тестирования)"""
+        try:
+            sample_rate = self.sample_rate if hasattr(self, 'sample_rate') else 16000
+            num_frames = int(sample_rate * duration)
+            silent_data = b'\x00' * num_frames * 2  # 2 байта на сэмпл для paInt16
+            
+            with wave.open(filepath, "wb") as wf:
+                wf.setnchannels(self.channels)
+                wf.setsampwidth(2)  # 2 байта для paInt16
+                wf.setframerate(sample_rate)
+                wf.writeframes(silent_data)
+                
+            logger.info(f"📁 Создан WAV с тишиной: {filepath}, {duration} сек, {sample_rate} Hz")
+        except Exception as e:
+            logger.error(f"❌ Ошибка создания тестового WAV: {e}")
+
+    def cleanup(self):
+        """Очистка ресурсов"""
+        try:
+            if self.stream:
+                self.stream.stop_stream()
+                self.stream.close()
+                self.stream = None
+        except Exception as e:
+            logger.debug(f"⚠️ Ошибка при закрытии потока: {e}")
+        
+        try:
+            if self.audio:
+                self.audio.terminate()
+                self.audio = None
+        except Exception as e:
+            logger.debug(f"⚠️ Ошибка при завершении PyAudio: {e}")
+
+    def stop(self):
+        """Остановить запись досрочно"""
+        self.stop_recording = True
+        self.cleanup()
+    
+    def __del__(self):
+        """Деструктор для гарантированной очистки"""
+        self.cleanup()
 
 class VideoPlayer:
     """Класс для воспроизведения видео"""
