@@ -146,13 +146,13 @@ class SimpleAudioRecorder:
     """Класс для реальной записи аудио с микрофона"""
 
     def __init__(self, gui_callback=None):
-        self.sample_rate = 44100
+        self.sample_rate = 16000  # Используем стандартную частоту 16kHz
         self.channels = 1
         self.format = pyaudio.paInt16
         self.chunk = 1024
-        self.gui_callback = gui_callback  # Функция для обновления GUI
+        self.gui_callback = gui_callback
         self.stop_recording = False
-
+        
     def record_audio(self, duration=RECORD_DURATION_SECONDS):
         """Записать аудио с микрофона и вернуть путь к WAV файлу"""
         audio = pyaudio.PyAudio()
@@ -161,15 +161,37 @@ class SimpleAudioRecorder:
 
         try:
             logger.info(f"🎤 Начинаю ЗАПИСЬ с микрофона ({duration} сек)...")
-
-            stream = audio.open(
-                format=self.format,
-                channels=self.channels,
-                rate=self.sample_rate,
-                input=True,
-                frames_per_buffer=self.chunk
-            )
-
+            
+            # Получаем информацию о доступных устройствах
+            device_info = audio.get_default_input_device_info()
+            logger.info(f"📊 Устройство записи: {device_info.get('name')}")
+            logger.info(f"📊 Поддерживаемые частоты: {device_info.get('defaultSampleRate')}")
+            
+            # Пробуем разные частоты дискретизации
+            sample_rates = [16000, 44100, 48000, 22050, 8000]
+            
+            for rate in sample_rates:
+                try:
+                    stream = audio.open(
+                        format=self.format,
+                        channels=self.channels,
+                        rate=rate,
+                        input=True,
+                        frames_per_buffer=self.chunk,
+                        input_device_index=device_info['index']
+                    )
+                    self.sample_rate = rate
+                    logger.info(f"✅ Успешно открыт поток с частотой {rate} Hz")
+                    break
+                except Exception as e:
+                    logger.warning(f"⚠️ Частота {rate} Hz не поддерживается: {e}")
+                    if stream:
+                        stream.close()
+                        stream = None
+            
+            if not stream:
+                raise Exception("Не удалось найти поддерживаемую частоту дискретизации")
+            
             total_chunks = int(self.sample_rate / self.chunk * duration)
             self.stop_recording = False
 
@@ -181,14 +203,13 @@ class SimpleAudioRecorder:
                 data = stream.read(self.chunk, exception_on_overflow=False)
                 frames.append(data)
                 
-                # Обновляем GUI (если передан callback)
                 if self.gui_callback:
                     elapsed = (i + 1) * self.chunk / self.sample_rate
                     remaining = duration - elapsed
                     self.gui_callback(int(remaining))
 
             logger.info("✅ Запись завершена")
-
+            
             # Создаём временный WAV файл
             with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as tmp:
                 wav_path = tmp.name
@@ -217,10 +238,6 @@ class SimpleAudioRecorder:
                 audio.terminate()
             except Exception:
                 pass
-    
-    def stop(self):
-        """Остановить запись досрочно"""
-        self.stop_recording = True
 
 class VideoPlayer:
     """Класс для воспроизведения видео"""
