@@ -390,7 +390,8 @@ class MainGUI:
         self.timer_label = None
         self.is_recording = False
         self.recording_seconds_left = RECORD_DURATION_SECONDS
-        
+        self.fullscreen = True  # Флаг полноэкранного режима
+    
     def initialize(self):
         """Инициализировать GUI"""
         try:
@@ -400,8 +401,15 @@ class MainGUI:
                 self.root.title("AI Герои")
                 self.root.configure(bg='#1a1a1a')
                 
-                # Скрываем корневое окно, будем использовать полноэкранные окна
-                self.root.withdraw()
+                # Настраиваем полноэкранный режим для корневого окна
+                self.root.attributes('-fullscreen', self.fullscreen)
+                
+                # Добавляем кнопку выхода (Esc)
+                self.root.bind('<Escape>', lambda e: self.root.quit())
+                
+                # Центрируем окно, если не в полноэкранном режиме
+                if not self.fullscreen:
+                    self.center_window(self.root)
                 
                 self._initialized = True
                 logger.info("✅ Tkinter инициализирован")
@@ -409,32 +417,55 @@ class MainGUI:
             logger.error(f"❌ Ошибка инициализации Tkinter: {e}")
             logger.error(traceback.format_exc())
     
+    def center_window(self, window):
+        """Центрировать окно на экране"""
+        try:
+            window.update_idletasks()
+            
+            # Получаем размеры экрана
+            screen_width = window.winfo_screenwidth()
+            screen_height = window.winfo_screenheight()
+            
+            # Получаем размеры окна
+            window_width = window.winfo_width()
+            window_height = window.winfo_height()
+            
+            # Если окно еще не отрисовано, используем размеры по умолчанию
+            if window_width == 1:
+                window_width = 800
+            if window_height == 1:
+                window_height = 600
+            
+            # Вычисляем координаты для центрирования
+            x = (screen_width - window_width) // 2
+            y = (screen_height - window_height) // 2
+            
+            window.geometry(f'{window_width}x{window_height}+{x}+{y}')
+            
+        except Exception as e:
+            logger.error(f"❌ Ошибка центрирования окна: {e}")
+    
     def show_loading_screen(self, message="Загрузка..."):
         """Показать экран загрузки"""
         try:
             if not self._initialized:
                 self.initialize()
             
-            # Закрываем предыдущее окно
-            if self.current_window:
-                try:
-                    self.current_window.destroy()
-                except:
-                    pass
+            # Очищаем корневое окно
+            for widget in self.root.winfo_children():
+                widget.destroy()
             
-            # Создаем новое окно
-            self.current_window = tk.Toplevel(self.root)
-            self.current_window.title("Загрузка")
-            self.current_window.attributes('-fullscreen', True)
-            self.current_window.configure(bg='#1a1a1a')
+            # Основной фрейм
+            main_frame = tk.Frame(self.root, bg='#1a1a1a')
+            main_frame.pack(expand=True, fill='both')
             
             # Центрируем содержимое
-            main_frame = tk.Frame(self.current_window, bg='#1a1a1a')
-            main_frame.pack(expand=True)
+            center_frame = tk.Frame(main_frame, bg='#1a1a1a')
+            center_frame.pack(expand=True)
             
             # Индикатор загрузки
             loading_label = tk.Label(
-                main_frame,
+                center_frame,
                 text="⏳",
                 font=('Arial', 72),
                 bg='#1a1a1a',
@@ -444,7 +475,7 @@ class MainGUI:
             
             # Сообщение
             message_label = tk.Label(
-                main_frame,
+                center_frame,
                 text=message,
                 font=('Arial', 24),
                 bg='#1a1a1a',
@@ -453,7 +484,7 @@ class MainGUI:
             message_label.pack(pady=20)
             
             # Обновляем окно
-            self.current_window.update()
+            self.root.update()
             logger.info(f"🖥 Показан экран загрузки: {message}")
             
         except Exception as e:
@@ -465,19 +496,12 @@ class MainGUI:
             if not self._initialized:
                 self.initialize()
             
-            # Обновляем существующее окно или создаем новое
-            if not self.current_window:
-                self.current_window = tk.Toplevel(self.root)
-                self.current_window.title("Запись вопроса")
-                self.current_window.attributes('-fullscreen', True)
-                self.current_window.configure(bg='#1a1a1a')
-            
-            # Очищаем окно
-            for widget in self.current_window.winfo_children():
+            # Очищаем корневое окно
+            for widget in self.root.winfo_children():
                 widget.destroy()
             
             # Основной фрейм
-            main_frame = tk.Frame(self.current_window, bg='#1a1a1a')
+            main_frame = tk.Frame(self.root, bg='#1a1a1a')
             main_frame.pack(expand=True, fill='both', padx=50, pady=50)
             
             # Верхняя панель с информацией
@@ -575,7 +599,7 @@ class MainGUI:
             self.status_label.pack()
             
             # Обновляем окно
-            self.current_window.update()
+            self.root.update()
             self.is_recording = False
             self.recording_seconds_left = RECORD_DURATION_SECONDS
             
@@ -591,36 +615,36 @@ class MainGUI:
             if not self._initialized:
                 self.initialize()
             
-            # Обновляем существующее окно
-            if self.current_window:
-                for widget in self.current_window.winfo_children():
-                    widget.destroy()
-                
-                # Основной фрейм
-                main_frame = tk.Frame(self.current_window, bg='#1a1a1a')
-                main_frame.pack(expand=True, fill='both')
-                
-                # Анимация загрузки
-                loading_label = tk.Label(
-                    main_frame,
-                    text="⏳",
-                    font=('Arial', 72),
-                    bg='#1a1a1a',
-                    fg='#ffffff'
-                )
-                loading_label.pack(pady=50)
-                
-                # Сообщение
-                message_label = tk.Label(
-                    main_frame,
-                    text=message,
-                    font=('Arial', 24),
-                    bg='#1a1a1a',
-                    fg='#cccccc'
-                )
-                message_label.pack(pady=20)
-                
-                # Дополнительная информация
+            # Очищаем корневое окно
+            for widget in self.root.winfo_children():
+                widget.destroy()
+            
+            # Основной фрейм
+            main_frame = tk.Frame(self.root, bg='#1a1a1a')
+            main_frame.pack(expand=True, fill='both')
+            
+            # Анимация загрузки
+            loading_label = tk.Label(
+                main_frame,
+                text="⏳",
+                font=('Arial', 72),
+                bg='#1a1a1a',
+                fg='#ffffff'
+            )
+            loading_label.pack(pady=50)
+            
+            # Сообщение
+            message_label = tk.Label(
+                main_frame,
+                text=message,
+                font=('Arial', 24),
+                bg='#1a1a1a',
+                fg='#cccccc'
+            )
+            message_label.pack(pady=20)
+            
+            # Дополнительная информация
+            if hero_name:
                 info_label = tk.Label(
                     main_frame,
                     text=f"Герой: {hero_name}",
@@ -629,14 +653,27 @@ class MainGUI:
                     fg='#888888'
                 )
                 info_label.pack(pady=10)
-                
-                # Обновляем окно
-                self.current_window.update()
-                self.is_recording = False
-                logger.info(f"🖥 Показан экран ожидания: {message}")
-                
+            
+            # Обновляем окно
+            self.root.update()
+            self.is_recording = False
+            logger.info(f"🖥 Показан экран ожидания: {message}")
+            
         except Exception as e:
             logger.error(f"❌ Ошибка показа экрана ожидания: {e}")
+    
+    def toggle_fullscreen(self, event=None):
+        """Переключить полноэкранный режим"""
+        self.fullscreen = not self.fullscreen
+        self.root.attributes('-fullscreen', self.fullscreen)
+        if not self.fullscreen:
+            self.center_window(self.root)
+    
+    def exit_fullscreen(self, event=None):
+        """Выйти из полноэкранного режима"""
+        self.fullscreen = False
+        self.root.attributes('-fullscreen', False)
+        self.center_window(self.root)
     
     def start_recording_mode(self):
         """Переключить интерфейс в режим записи"""
@@ -651,9 +688,8 @@ class MainGUI:
             self.is_recording = True
             self.recording_seconds_left = RECORD_DURATION_SECONDS
             
-            if self.current_window:
-                self.current_window.update()
-                
+            self.root.update()
+            
         except Exception as e:
             logger.error(f"❌ Ошибка перехода в режим записи: {e}")
     
@@ -680,8 +716,7 @@ class MainGUI:
                         self.status_label.config(text="✅ Запись завершена", fg='#44ff44')
                 
                 # Обновляем интерфейс
-                if self.current_window:
-                    self.current_window.update_idletasks()
+                self.root.update_idletasks()
                     
         except Exception as e:
             logger.error(f"❌ Ошибка обновления таймера: {e}")
@@ -689,10 +724,9 @@ class MainGUI:
     def close(self):
         """Закрыть все окна"""
         try:
-            if self.current_window:
-                self.current_window.destroy()
             if self.root:
                 self.root.quit()
+                self.root.destroy()
         except:
             pass
     
@@ -704,22 +738,16 @@ class MainGUI:
             
             if self._initialized:
                 logger.info("🖥 Запускаю главный цикл Tkinter...")
-                # Запускаем в режиме обновления без блокировки
-                self.root.after(100, self._update_loop)
+                
+                # Показываем начальный экран
+                self.show_loading_screen("Инициализация...")
+                
+                # Запускаем главный цикл
                 self.root.mainloop()
                 
         except Exception as e:
             logger.error(f"❌ Ошибка GUI цикла: {e}")
             logger.error(traceback.format_exc())
-    
-    def _update_loop(self):
-        """Цикл обновления GUI"""
-        try:
-            self.root.update_idletasks()
-            self.root.update()
-            self.root.after(100, self._update_loop)
-        except:
-            pass
 
 def play_transition_video(gui, video_path, message="Переход..."):
     """Воспроизвести переходное видео с сохранением GUI"""
